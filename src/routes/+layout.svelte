@@ -1,26 +1,34 @@
 <script>
-	import LeftNav from '$components/left-nav.svelte';
+	import Leftside from '$components/leftside.svelte';
 </script>
 
 <nav>
-	<LeftNav />
+	<Leftside />
 </nav>
-<main />
+
+<main>
+	<slot />
+</main>
 
 <footer />
 
-<slot />
-
 <style lang="scss">
-	@import '/styles/global.css';
+	@import '$styles/global.css';
+
 	nav {
-		float: left;
 		width: 300px;
-		background: #f2f3f7;
+		background-image: url('/images/denim.png');
+		background-repeat: repeat;
 		padding: 10px;
+		flex-shrink: 0;
+		color: $primary-red;
+		display: flex;
+		justify-content: center;
 		box-sizing: border-box;
+		z-index: 10;
 	}
+
 	main {
-		float: right;
+		flex-grow: 1;
 	}
 </style>

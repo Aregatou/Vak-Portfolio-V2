@@ -1,0 +1,59 @@
+html {
+  font-size: 16px;
+}
+
+* {
+  /* border:2px solid green; */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+#content {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+    /* Start from left off-screen */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    /* End at its final position */
+  }
+}
+
+/* Apply the animation to the element when it's in the viewport */
+.fade-in-section {
+  opacity: 0;
+  /* Start invisible */
+  transform: translateX(-50px);
+  /* Start from left off-screen */
+  transition: opacity 0s ease-out, transform 0s ease-out;
+}
+
+.fade-in-section-visible {
+  animation: slideInFromLeft 1s ease-out forwards;
+  /* 'forwards' will persist the final state */
+}

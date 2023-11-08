@@ -8,7 +8,11 @@ const config = {
 	},
 	preprocess: preprocess({
 		scss: {
-		},
+			prependData: `@import './src/styles/_variables.scss';`,
+			includePaths: [
+				'src/styles',
+			],
+		}
 	}),
 };
 
