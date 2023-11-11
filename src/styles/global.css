@@ -1,59 +1,94 @@
-html {
-  font-size: 16px;
+/* Regular weight */
+@font-face {
+	font-family: 'Quicksand';
+	src: url('./fonts/Quicksand-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
-* {
-  /* border:2px solid green; */
+/* Bold weight */
+@font-face {
+	font-family: 'Quicksand-bold';
+	src: url('./fonts/Quicksand-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Light weight */
+@font-face {
+	font-family: 'Quicksand-light';
+	src: url('./fonts/Quicksand-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Medium weight */
+@font-face {
+	font-family: 'Quicksand-med';
+	src: url('./fonts/Quicksand-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+html {
+	font-size: 16px;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
+	font-family: Quicksand, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	line-height: 1.5;
+	background: #f5efed;
+	background-image: url('/images/fabric.png');
+	background-repeat: repeat;
 }
 
 #content {
-  max-width: 1170px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
+	max-width: 1170px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+	from {
+		opacity: 0;
+	}
 
-  to {
-    opacity: 1;
-  }
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-    /* Start from left off-screen */
-  }
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+		/* Start from left off-screen */
+	}
 
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-    /* End at its final position */
-  }
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+		/* End at its final position */
+	}
 }
 
 /* Apply the animation to the element when it's in the viewport */
 .fade-in-section {
-  opacity: 0;
-  /* Start invisible */
-  transform: translateX(-50px);
-  /* Start from left off-screen */
-  transition: opacity 0s ease-out, transform 0s ease-out;
+	opacity: 0;
+	/* Start invisible */
+	transform: translateX(-50px);
+	/* Start from left off-screen */
+	transition: opacity 0s ease-out, transform 0s ease-out;
 }
 
 .fade-in-section-visible {
-  animation: slideInFromLeft 1s ease-out forwards;
-  /* 'forwards' will persist the final state */
+	animation: slideInFromLeft 1s ease-out forwards;
+	/* 'forwards' will persist the final state */
 }

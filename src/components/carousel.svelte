@@ -6,10 +6,9 @@
 	let activeCaption = '';
 
 	const captions = [
-		'Caption for First Slide',
-		'Caption for Second Slide',
-		'Caption for Third Slide'
-		// ...add as many captions as there are slides
+		'I built this portfolio from scratch',
+		'This is being hosted on my home server',
+		'I do a lot of things'
 	];
 
 	function updateCaption(index) {
@@ -25,7 +24,6 @@
 	class="carousel-container"
 	id="home"
 	class:fadeIn={carouselVisible}
-	role="region"
 	aria-label="Carousel of images"
 >
 	<div class="color-overlay" />
@@ -63,8 +61,10 @@
 		{activeCaption}
 	</div>
 	<div class="carousel-text">
-		<h1>Hey, I'm vak.com</h1>
-		<h3>UI/UX & Web Designer</h3>
+		<h1>
+			<span class="subtle">Hey</span>,
+			<span class="accent">I<span class="subtle">'</span>m vak.com</span>
+		</h1>
 	</div>
 </section>
 
@@ -99,7 +99,7 @@
 			transition: $ease-transform;
 
 			&:hover {
-				transform: scale(1.03);
+				transform: scale(1.02);
 			}
 			&.move-left {
 				object-position: 30% 50%;
@@ -115,17 +115,38 @@
 			text-align: center;
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 			z-index: $zindex-content;
+			font-size: 2rem;
+			pointer-events: none;
+
+			span {
+				pointer-events: none;
+
+				&.subtle {
+					opacity: 0.6;
+				}
+				&.accent {
+					border-bottom: 5px solid $primary-red;
+				}
+			}
+		}
+		:global(.splide__pagination) {
+			bottom: 150px;
 		}
 	}
 
 	.splide-caption {
 		position: absolute;
-		bottom: 10%;
+		bottom: 40%;
 		left: 50%;
 		transform: translateX(-50%);
-		color: $primary-red;
+		color: $gray-light;
 		padding: 1em;
 		text-align: center;
+		font-family: 'Quicksand-bold';
+		text-shadow: $text-shadow;
+		font-size: 1.2rem;
+		z-index: 3;
+		pointer-events: none;
 	}
 
 	@media (prefers-reduced-motion: reduce) {

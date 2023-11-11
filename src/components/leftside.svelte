@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	onMount(() => {
-		// This is a fallback for smooth scrolling when "scroll-behavior: smooth" isn't supported
 		const anchors = document.querySelectorAll('a[href^="#"]');
 		anchors.forEach((anchor) => {
 			anchor.addEventListener('click', function (e) {
@@ -27,7 +26,16 @@
 	<h4>Developer in MD</h4>
 	<ul>
 		<li><a href="#home">Home</a></li>
-		<li><a href="#about">About</a></li>
+		<li><a href="#whatido">What I Do</a></li>
+		<li><a href="#tech">Tech I Like</a></li>
+		<li><a href="#clients">Clients</a></li>
+		<li><a href="#whatilike">What I Like</a></li>
+	</ul>
+	<ul>
+		<li><a href="https://www.linkedin.com/in/vak-k/" target="_blank">LinkedIn</a></li>
+		<li>
+			<a href="https://github.com/Aregatou/Vak-Portfolio-V2" target="_blank">This site's code</a>
+		</li>
 	</ul>
 </div>
 
@@ -48,9 +56,9 @@
 				border-radius: 50%;
 				border: 5px solid $primary-red;
 				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-				transition: transform 0.2s ease-in-out;
+				transition: $ease-transform;
 				&:hover {
-					transform: translateY(-5px);
+					transform: scale(1.05);
 				}
 			}
 		}
@@ -61,6 +69,7 @@
 			text-align: center;
 			color: $white;
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+			font-weight: 500;
 		}
 		ul {
 			padding: 0;
@@ -74,7 +83,7 @@
 			display: inline-block;
 			overflow: hidden;
 			vertical-align: middle;
-			font-weight: 700;
+			font-weight: 400;
 			text-decoration: none;
 			font-size: 1.1rem;
 			&::after {
