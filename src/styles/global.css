@@ -54,7 +54,9 @@ body {
 	display: flex;
 	flex-direction: row;
 }
-
+a {
+	color: #e04343;
+}
 @keyframes fadeIn {
 	from {
 		opacity: 0;
