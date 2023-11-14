@@ -22,16 +22,16 @@
 	.card {
 		text-decoration: none;
 		color: inherit;
-		border-radius: 8px;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+		flex: 1;
 		--card-svg-color: var(--svg-color);
 		&:hover {
 			--card-svg-color: var(--hover-svg-color);
 			.card-image-circle {
 				background: $primary-red;
-				color: white;
+				color: $white;
 				:global(svg) {
 					transform: scale(1.15);
 				}

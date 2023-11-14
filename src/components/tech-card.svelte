@@ -23,9 +23,8 @@
 	.card {
 		position: relative;
 		padding: 1rem;
-		min-width: 200px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-		border-radius: 8px;
+		border-radius: 50%;
 		background: white;
 		margin: 1.5rem 1rem;
 		overflow: visible;

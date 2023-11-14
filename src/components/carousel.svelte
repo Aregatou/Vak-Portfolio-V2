@@ -62,7 +62,7 @@
 	</div>
 	<div class="carousel-text">
 		<h1>
-			<span class="subtle">Hey</span>,
+			<span class="subtle">Hey,</span>
 			<span class="accent">I<span class="subtle">'</span>m vak.com</span>
 		</h1>
 	</div>
@@ -139,7 +139,7 @@
 		bottom: 40%;
 		left: 50%;
 		transform: translateX(-50%);
-		color: $gray-light;
+		color: $white-transparent;
 		padding: 1em;
 		text-align: center;
 		font-family: 'Quicksand-bold';

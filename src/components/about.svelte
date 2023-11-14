@@ -2,8 +2,50 @@
 	import { onMount } from 'svelte';
 	import Card from '$components/display-card.svelte';
 	import TechCard from '$components/tech-card.svelte';
+	import ProgressBar from '$components/progress-bar.svelte';
 	import Clients from '$components/clients.svelte';
 	import { SVGIcons } from '$lib/svgList.js';
+
+	const frontEndSkills = [
+		{ title: 'JavaScript', svgMarkup: SVGIcons.javascript, color: '#f7df1e', percentage: 100 },
+		{ title: 'HTML / CSS', svgMarkup: SVGIcons.html, percentage: 100 },
+		{ title: 'Svelte', svgMarkup: SVGIcons.svelte, color: '#ff794c', percentage: 90 },
+		{ title: 'Angular', svgMarkup: SVGIcons.angular, color: '#dd1b16', percentage: 70 },
+		{ title: 'React', svgMarkup: SVGIcons.react, color: '#149eca', percentage: 55 },
+		{ title: 'TypeScript', svgMarkup: SVGIcons.typescript, color: '#7fa2c9', percentage: 72 },
+		{ title: 'jQuery', svgMarkup: SVGIcons.jquery, color: '#0769ad', percentage: 82 },
+		{ title: 'SASS/SCSS', svgMarkup: SVGIcons.sass, color: '#CF649A', percentage: 90 }
+	];
+	const otherSkills = [
+		{ title: 'Drupal', svgMarkup: SVGIcons.drupal, color: '#0678be', percentage: 86 },
+		{ title: 'Docker', svgMarkup: SVGIcons.docker, color: '#1d63ed', percentage: 62 },
+		{ title: 'Moqups / Figma', svgMarkup: SVGIcons.figma, color: '#0acf83', percentage: 65 },
+		{
+			title: 'Git / Github / Version Control',
+			svgMarkup: SVGIcons.git,
+			color: '#fff',
+			percentage: 80
+		},
+		{
+			title: 'UnRaid Server Management',
+			svgMarkup: SVGIcons.unraid,
+			color: '#F05A2E',
+			percentage: 80
+		},
+		{ title: 'Jira', svgMarkup: SVGIcons.jira, color: '#3491F6', percentage: 85 },
+		{
+			title: 'Slack / MS Teams / Zoom',
+			svgMarkup: SVGIcons.slack,
+			color: '#5E1E66',
+			percentage: 100
+		},
+		{
+			title: 'Agile + Scrum Workflow',
+			svgMarkup: SVGIcons.scrum,
+			color: '#5A72E9',
+			percentage: 100
+		}
+	];
 
 	onMount(() => {
 		const observer = new IntersectionObserver(
@@ -31,7 +73,7 @@
 		<div class="about-section-header overlap-content">
 			<h4><span>Vak</span>htang Kobiashvili</h4>
 		</div>
-		<div class="about-section-content about-me-container">
+		<div class="about-section-content about-me-container outlined">
 			<p>I do a lot of creative things and they usually end up pretty good.</p>
 			<p>
 				For <strong>8 years</strong>, I've been a developer on many different
@@ -50,7 +92,6 @@
 				That's pretty cool, right? It took me days to figure out my media server, cloudflare DNS,
 				port-forwarding, and proxy-management configurations.<br /> <em>I</em> think that's pretty cool.
 			</p>
-			<p>I also build a lot of art and do some fun sports.</p>
 		</div>
 	</div>
 	<div class="about-section fade-in-section" id="whatido">
@@ -80,18 +121,32 @@
 
 	<div class="about-section fade-in-section" id="tech">
 		<div class="about-section-header overlap-content">
-			<h4>Tech I like</h4>
+			<h4><span>Tech</span> Skills</h4>
 		</div>
 		<div class="about-section-content tech-container">
-			<TechCard title="Svelte" svgMarkup={SVGIcons.react} color="#ff794c" content="" />
-			<TechCard title="Angular" svgMarkup={SVGIcons.angular} color="#dd1b16" content="" />
-			<TechCard title="React" svgMarkup={SVGIcons.react} color="#149eca" content="" />
-			<TechCard title="Drupal" svgMarkup={SVGIcons.drupal} color="#0678be" content="" />
-			<TechCard title="TypeScript" svgMarkup={SVGIcons.typescript} color="#7fa2c9" content="" />
-			<TechCard title="jQuery" svgMarkup={SVGIcons.jquery} color="#0769ad" content="" />
-			<TechCard title="SASS/SCSS" svgMarkup={SVGIcons.sass} color="#CF649A" content="" />
-			<TechCard title="Docker" svgMarkup={SVGIcons.docker} color="#1d63ed" content="" />
-			<TechCard title="Moqups / Figma" svgMarkup={SVGIcons.figma} color="#0acf83" content="" />
+			<p>100% signifies I can talk about this skill for hours</p>
+			<div class="skills">
+				<div class="column">
+					{#each frontEndSkills as skill (skill.title)}
+						<ProgressBar
+							skill={skill.title}
+							percentage={skill.percentage}
+							svgMarkup={skill.svgMarkup}
+							color={skill.color}
+						/>
+					{/each}
+				</div>
+				<div class="column">
+					{#each otherSkills as skill}
+						<ProgressBar
+							skill={skill.title}
+							percentage={skill.percentage}
+							svgMarkup={skill.svgMarkup}
+							color={skill.color}
+						/>
+					{/each}
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="about-section fade-in-section" id="clients">
@@ -108,17 +163,19 @@
 			<h4>What I <span>like</span></h4>
 		</div>
 		<div class="about-section-content cards-container">
-			<Card
-				title="Woodworking"
-				description="3 years of hobbiest woodworking"
-				svgMarkup={SVGIcons.woodworking}
-			/>
+			<div class="cards-container">
+				<Card
+					title="Woodworking"
+					description="3 years of hobbiest woodworking"
+					svgMarkup={SVGIcons.woodworking}
+				/>
 
-			<Card
-				title="Photography"
-				description="10 years of hobbiest photography"
-				svgMarkup={SVGIcons.photo}
-			/>
+				<Card
+					title="Photography"
+					description="10 years of hobbiest photography"
+					svgMarkup={SVGIcons.photo}
+				/>
+			</div>
 		</div>
 	</div>
 </div>
@@ -126,7 +183,6 @@
 <style lang="scss">
 	#about {
 		position: relative;
-		padding: 2rem;
 		width: 100%;
 		top: -100px;
 		.about-section {
@@ -141,8 +197,8 @@
 				width: 60%;
 				margin: 0 auto;
 				position: relative;
-				box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-				border-radius: 15px;
+				box-shadow: $box-shadow;
+				border-radius: $curve-border;
 				text-align: center;
 				font-size: 2.5rem;
 				font-family: 'Quicksand-med';
@@ -152,90 +208,58 @@
 					margin: 1rem;
 					letter-spacing: 0.1rem;
 				}
-				h5 {
-					margin: 0;
-					color: $gray-light;
-				}
 				span {
 					color: $primary-yellow;
 				}
 			}
 			.about-section-content {
 				padding-top: 3rem;
-			}
-		}
-		.tech-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-evenly;
-			border: 6px solid $space-purple;
-			border-radius: 15px;
-			margin-left: 16px;
-		}
-		.clients-container {
-			background: white;
-			border-radius: 0 20px 20px 0;
-			padding: $pad-1;
-			padding: 1rem 2rem;
-			font-size: 1.1rem;
-			ul {
-				padding-left: 2rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+
+				.cards-container {
+					display: flex;
+					justify-content: space-evenly;
+				}
+				&.outlined {
+					@include container-outline($denim-black);
+				}
 			}
 		}
 		.about-me-container {
-			/* background: ; */
-			/* color: $primary-white; */
-			/* text-shadow: $text-shadow; */
-			border-radius: 15px;
-			margin-left: 16px;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
-			padding: 1rem;
+			color: $white;
+			padding: $pad-1 * 3;
 			font-size: 1.3rem;
-			font-family: 'Quicksand';
-			background-color: $background-blue;
-			color: #fff;
-			box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ef3724;
 			a {
-				text-decoration: none;
-				position: relative;
-				overflow: hidden;
-				&::after {
-					content: '';
-					position: absolute;
-					width: 0;
-					height: 2px;
-					display: block;
-					margin-top: 2px;
-					right: 50%;
-					bottom: 0;
-					background: $primary-red;
-					transition: width 0.5s ease, right 0.5s ease;
-				}
-				&:hover::after {
-					width: 100%;
-					right: 0;
+				@include anchor-underline;
+			}
+		}
+		.tech-container {
+			p {
+				text-align: center;
+				font-size: 1.2rem;
+				font-style: italic;
+			}
+			.skills {
+				display: flex;
+				div {
+					flex: 1;
 				}
 			}
-			/* &:after {
-				content: '';
-				position: absolute;
-				top: -15px; // Full offset
-				left: -15px; // Full offset
-				right: -15px; // Full offset
-				bottom: -15px; // Full offset
-				box-shadow: 0px 0px 0px 15px yellow; // Adjust color and size
-				z-index: -2;
-			} */
-			/* letter-spacing: 1px; */
+
+			/* flex-wrap: wrap; */
+			/* flex-direction: row !important; */
 		}
-	}
-	.cards-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		gap: 16px;
-		padding: 16px;
+		.clients-container {
+			background: $white;
+			border-radius: $radius-left;
+			padding: $pad-1 2rem;
+			font-size: 1.1rem;
+			ul {
+				padding-left: 3rem;
+			}
+		}
 	}
 
 	.overlap-content {

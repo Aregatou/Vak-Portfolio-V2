@@ -26,8 +26,9 @@
 	<h4>Developer in MD</h4>
 	<ul>
 		<li><a href="#home">Home</a></li>
+		<li><a href="#about-me">About Me</a></li>
 		<li><a href="#whatido">What I Do</a></li>
-		<li><a href="#tech">Tech I Like</a></li>
+		<li><a href="#tech">Tech Skills</a></li>
 		<li><a href="#clients">Clients</a></li>
 		<li><a href="#whatilike">What I Like</a></li>
 	</ul>
@@ -77,31 +78,13 @@
 			list-style-type: none;
 		}
 		a {
+			@include anchor-underline;
 			color: $white;
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-			position: relative;
 			display: inline-block;
-			overflow: hidden;
 			vertical-align: middle;
 			font-weight: 400;
-			text-decoration: none;
 			font-size: 1.1rem;
-			&::after {
-				content: '';
-				position: absolute;
-				width: 0;
-				height: 2px;
-				display: block;
-				margin-top: 2px;
-				right: 50%;
-				bottom: 0;
-				background: $primary-red;
-				transition: width 0.5s ease, right 0.5s ease;
-			}
-			&:hover::after {
-				width: 100%;
-				right: 0;
-			}
 		}
 	}
 </style>
