@@ -1,9 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
+	import Modal from './Modal.svelte';
+	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+	import '@splidejs/svelte-splide/css';
 	import Card from '$components/display-card.svelte';
 	import TechCard from '$components/tech-card.svelte';
 	import ProgressBar from '$components/progress-bar.svelte';
 	import Clients from '$components/clients.svelte';
+	import Timeline from '$components/timeline.svelte';
 	import { SVGIcons } from '$lib/svgList.js';
 
 	const frontEndSkills = [
@@ -66,6 +70,24 @@
 			observer.observe(el);
 		});
 	});
+	let showModal = false;
+
+	// Array of image URLs for the slideshow
+	let images = [
+		'/path/to/image1.jpg',
+		'/path/to/image2.jpg'
+		// more images...
+	];
+
+	// Function to open the modal
+	function openModal() {
+		showModal = true;
+	}
+
+	// Function to handle modal close event
+	function handleModalClose() {
+		showModal = false;
+	}
 </script>
 
 <div id="about">
@@ -74,57 +96,47 @@
 			<h4><span>Vak</span>htang Kobiashvili</h4>
 		</div>
 		<div class="about-section-content about-me-container outlined">
-			<p>I do a lot of creative things and they usually end up pretty good.</p>
+			<p>I build creative stuff that looks pretty good.</p>
 			<p>
-				For <strong>8 years</strong>, I've been a developer on many different
+				For <strong>9 years</strong>, I've been working with
 				<strong
 					>508-compliant
 					<a href="#clients">government contracts</a></strong
-				>. But federally regulated accessibility standards are often misunderstood as
-				<strong><em>have to be boring-looking</em></strong>.
+				>
+				—proving that accessible design <em>doesn't have to be dull</em>.
 			</p>
 			<p>
-				I do what I can to convince you otherwise, like design this fully 508-compliant portfolio I
-				built from scratch using Svelte, running in an ngninx docker container, on my 28TB unRaid
-				server, hosted in my living room.
+				I built this portfolio from scratch using Svelte, packed it into an Nginx Docker container,
+				and host it directly on my 38TB unRaid server right in my living room.
 			</p>
 			<p>
-				That's pretty cool, right? It took me days to figure out my media server, cloudflare DNS,
-				port-forwarding, and proxy-management configurations.<br /> <em>I</em> think that's pretty cool.
+				While I think that's pretty cool, I'm also fairly confident making things with my hands too.
 			</p>
 		</div>
 	</div>
+
 	<div class="about-section fade-in-section" id="whatido">
 		<div class="about-section-header overlap-content">
 			<h4>What I <span>do</span></h4>
 		</div>
-		<div class="about-section-content">
+		<div class="about-section-content what-i-do">
 			<div class="cards-container">
 				<Card
-					title="Web Development"
-					description="8 years of experience developing web design solutions."
-					svgMarkup={SVGIcons.webDev}
+					title="Responsive Web Design"
+					description="9 years of crafting websites that look great and work seamlessly on any device."
+					svgMarkup={SVGIcons.responsive}
 				/>
 				<Card
 					title="508 Compliance & Accessibility"
-					description="6 years of experience working with a variety of government clients."
+					description="9 years of turning “must-have” compliance into user-friendly, engaging experiences."
 					svgMarkup={SVGIcons.accessibility}
 				/>
 				<Card
-					title="Responsive Design"
-					description="8 years of experience implementing responsive applications."
-					svgMarkup={SVGIcons.responsive}
+					title="DIY Infrastructure & Automation"
+					description="Years of building and fine-tuning custom systems—from Dockerized apps to a home server setup—so everything runs just right."
+					svgMarkup={SVGIcons.diy}
 				/>
 			</div>
-		</div>
-	</div>
-
-	<div class="about-section fade-in-section" id="tech">
-		<div class="about-section-header overlap-content">
-			<h4><span>Tech</span> Skills</h4>
-		</div>
-		<div class="about-section-content tech-container">
-			<p>100% signifies I can talk about this skill for hours</p>
 			<div class="skills">
 				<div class="column">
 					{#each frontEndSkills as skill (skill.title)}
@@ -155,6 +167,15 @@
 		</div>
 		<div class="about-section-content clients-container">
 			<Clients />
+			<!-- <Timeline /> -->
+		</div>
+	</div>
+	<div class="about-section fade-in-section" id="timeline">
+		<!-- <div class="about-section-header overlap-content">
+			<h4>Clients</h4>
+		</div> -->
+		<div class="about-section-content timeline-container">
+			<Timeline />
 		</div>
 	</div>
 
@@ -177,6 +198,12 @@
 				/>
 			</div>
 		</div>
+	</div>
+	<div class="about-section fade-in-section">
+		<div class="about-section-header">
+			<h4>Art</h4>
+		</div>
+		<div class="about-section-content cards-container">test</div>
 	</div>
 </div>
 
@@ -225,6 +252,9 @@
 				&.outlined {
 					@include container-outline($denim-black);
 				}
+				&.timeline-container {
+					padding-top: 0;
+				}
 			}
 		}
 		.about-me-container {
@@ -235,7 +265,7 @@
 				@include anchor-underline;
 			}
 		}
-		.tech-container {
+		.what-i-do {
 			p {
 				text-align: center;
 				font-size: 1.2rem;
@@ -256,6 +286,7 @@
 			border-radius: $radius-left;
 			padding: $pad-1 2rem;
 			font-size: 1.1rem;
+			margin-bottom: 0;
 			ul {
 				padding-left: 3rem;
 			}

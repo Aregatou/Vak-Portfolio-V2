@@ -6,9 +6,10 @@
 	let activeCaption = '';
 
 	const captions = [
-		'I built this portfolio from scratch',
-		'This is being hosted on my home server',
-		'I do a lot of things'
+		'Developer with a strong focus on visually appealing designs',
+		'8 years of experience working with over a dozen health organizations',
+		'Currently hosting this site on a docker container running on my home unRaid server',
+		'I build things in real life too'
 	];
 
 	function updateCaption(index) {
@@ -56,6 +57,13 @@
 				class="carousel-image move-left"
 			/>
 		</SplideSlide>
+		<SplideSlide class="splideSlide">
+			<img
+				src="/images/car-4.jpg"
+				alt="Stunningly beautiful large woodworking art piece"
+				class="carousel-image move-left"
+			/>
+		</SplideSlide>
 	</Splide>
 	<div class="splide-caption">
 		{activeCaption}
@@ -79,6 +87,7 @@
 		animation: fadeIn 1s ease-out forwards;
 		border-radius: 0 20px 20px 0;
 		overflow: hidden;
+		min-height: 250px;
 
 		.color-overlay {
 			position: absolute;
@@ -117,10 +126,9 @@
 			z-index: $zindex-content;
 			font-size: 2rem;
 			pointer-events: none;
-
+			font-family: 'Quicksand-bold';
 			span {
 				pointer-events: none;
-
 				&.subtle {
 					opacity: 0.6;
 				}
@@ -129,14 +137,11 @@
 				}
 			}
 		}
-		:global(.splide__pagination) {
-			bottom: 150px;
-		}
 	}
 
 	.splide-caption {
 		position: absolute;
-		bottom: 40%;
+		top: 54%;
 		left: 50%;
 		transform: translateX(-50%);
 		color: $white-transparent;
@@ -148,10 +153,27 @@
 		z-index: 3;
 		pointer-events: none;
 	}
+	:global(.splide__pagination) {
+		bottom: 80px;
+	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.carousel-container {
 			animation: none;
+		}
+	}
+	@media screen and (max-height: 600px) {
+		.carousel-container {
+			.carousel-text {
+				top: 40px;
+			}
+			:global(.splide__pagination) {
+				display: none;
+			}
+		}
+
+		.splide-caption {
+			width: 100%;
 		}
 	}
 </style>

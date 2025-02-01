@@ -28,6 +28,7 @@
 		<div class="progress-bar-container">
 			<div class="progress-bar" style="width: {visible ? percentage : 0}%;">
 				{visible ? `${percentage}%` : ''}
+				<!-- {visible ? `${percentage}%` : ''} -->
 			</div>
 		</div>
 	</div>
@@ -99,7 +100,7 @@
 				.progress-bar {
 					background-color: $primary-orange;
 					line-height: 20px;
-					color: $white;
+					color: transparent;
 					text-align: center;
 					border-radius: $curve-border;
 					transition: width 1s ease-in-out;

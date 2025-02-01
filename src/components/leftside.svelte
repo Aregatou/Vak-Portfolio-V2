@@ -20,15 +20,15 @@
 
 <div id="nav-container">
 	<div class="pic-container">
-		<img src="/images/vak-photo.png" alt="Vak Kobiashvili" />
+		<a href="#home"><img src="/images/vak-photo.png" alt="Vak Kobiashvili" /></a>
 	</div>
 	<h2>Vak Kobiashvili</h2>
-	<h4>Developer in MD</h4>
+	<h4>Developer</h4>
 	<ul>
 		<li><a href="#home">Home</a></li>
 		<li><a href="#about-me">About Me</a></li>
 		<li><a href="#whatido">What I Do</a></li>
-		<li><a href="#tech">Tech Skills</a></li>
+		<!-- <li><a href="#tech">Tech Skills</a></li> -->
 		<li><a href="#clients">Clients</a></li>
 		<li><a href="#whatilike">What I Like</a></li>
 	</ul>
@@ -76,15 +76,15 @@
 			padding: 0;
 			text-align: center;
 			list-style-type: none;
-		}
-		a {
-			@include anchor-underline;
-			color: $white;
-			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-			display: inline-block;
-			vertical-align: middle;
-			font-weight: 400;
-			font-size: 1.1rem;
+			a {
+				@include anchor-underline;
+				color: $white;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+				display: inline-block;
+				vertical-align: middle;
+				font-weight: 400;
+				font-size: 1.1rem;
+			}
 		}
 	}
 </style>

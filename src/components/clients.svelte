@@ -1,15 +1,15 @@
 <div>
 	<p>
 		Prioritizing client needs means collaborating with team members, project managers, and
-		organization staff directly sometimes.
+		organization staff directly.
 	</p>
 	<p>
 		<strong>The incredible teams I've worked with span across many client organizations:</strong>
 	</p>
-	<ul class="client-list">
+	<!-- <ul class="client-list">
 		<li>
 			<a href="https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/" target="_blank"
-				><span>NCBI</span> - National Library of Medicine</a
+				><span>NCBI</span> - National Center for Biotechnology Information</a
 			>
 		</li>
 		<li>
@@ -60,7 +60,7 @@
 				><span>ODP</span> - Office of Disease Prevention</a
 			>
 		</li>
-	</ul>
+	</ul> -->
 </div>
 
 <style lang="scss">
