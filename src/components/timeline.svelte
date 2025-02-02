@@ -97,7 +97,7 @@
 
 <div class="timeline-container">
 	{#each timelineItems as item, i (item.organization + '-' + item.period)}
-		<div class="timeline-item" in:fade class:alternate={i % 2 !== 0}>
+		<div class="timeline-item fade-in-section" in:fade class:alternate={i % 2 !== 0}>
 			<!-- {#if i % 2 === 0}
 				<div class="timeline-content organization">
 					<div class="image-container {item.small}">
@@ -114,9 +114,11 @@
 				<p>{item.period}</p>
 			</div>
 			<div class="timeline-content right">
-				<div class="image-container {item.small}">
-					<a href={item.link} target="_blank"><img src={item.img} alt={item.alt} /></a>
-				</div>
+				<a href={item.link} target="_blank">
+					<div class="image-container {item.small}">
+						<img src={item.img} alt={item.alt} />
+					</div>
+				</a>
 			</div>
 			<!-- {/if} -->
 		</div>
@@ -128,7 +130,7 @@
 		position: relative;
 		width: 90%;
 		margin: 0 auto;
-		padding: 2rem 0;
+		padding: 1rem 0;
 		&:before {
 			content: '';
 			position: absolute;
@@ -136,7 +138,7 @@
 			bottom: 0;
 			left: 50%; /* Adjust this value to push the layout left */
 			width: 2px;
-			background: #ccc;
+			background: white;
 		}
 
 		.timeline-item {
@@ -146,9 +148,11 @@
 			position: relative;
 			align-items: center;
 			.timeline-content {
-				padding: 1rem;
+				padding: .7rem;
 				border-radius: 4px;
 				font-weight: 600;
+				transition: text-shadow 0.2s ease;
+				position:relative;
 				&.left {
 					text-align: right;
 					padding-right: 2rem;
@@ -182,6 +186,14 @@
 						}
 					}
 				}
+
+			}
+			&:hover {
+				&:after {
+					background: $primary-orange;
+					transition: background 0.2s ease;
+
+				}
 			}
 			&:after {
 				content: '';
@@ -195,6 +207,16 @@
 				border: 2px solid #ccc;
 				border-radius: 50%;
 				z-index: 1;
+
+			}
+			&:hover {
+				bottom: 2px;
+				transform: translateY(-2px);
+				.image-container {
+					box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+
+				}
+				// text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.25);
 			}
 		}
 	}

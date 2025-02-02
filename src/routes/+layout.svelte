@@ -2,8 +2,10 @@
 	import Leftside from '$components/leftside.svelte';
 	import { onMount } from 'svelte';
 
-	let lineWidth = '100%'; // Starting width of the colored line
+	let isNavOpen = false; // Controls sidebar visibility
+	let lineWidth = '100%'; // Progress bar width
 
+	// Scroll progress bar update
 	onMount(() => {
 		const updateLineWidth = () => {
 			const scrollPercentage =
@@ -17,15 +19,30 @@
 			window.removeEventListener('scroll', updateLineWidth);
 		};
 	});
+
+	// Toggle Sidebar Visibility
+	function toggleNav() {
+		isNavOpen = !isNavOpen;
+	}
 </script>
 
-<nav>
+<!-- Hamburger Menu Button (Appears on Small Screens) -->
+<button class="hamburger-menu" on:click={toggleNav}>
+	☰
+</button>
+
+<!-- Sidebar Navigation -->
+<nav class:is-hidden={!isNavOpen}>
 	<Leftside />
 </nav>
 
-<main>
-	<!-- <div class="colored-line" style="width: {lineWidth};" /> -->
+<!-- Main Content -->
+<main >
+	<!-- <main class:blurred={!isNavOpen}> -->
+	<!-- Overlay (clicking it closes the sidebar) -->
+	<!-- <div class:overlay={!isNavOpen} on:click={toggleNav}></div> -->
 
+	<!-- Main content slot -->
 	<slot />
 </main>
 
@@ -34,6 +51,7 @@
 <style lang="scss">
 	@import '$styles/global.css';
 
+	/* Nav Container */
 	nav {
 		width: 300px;
 		background-image: url('/images/denim.png');
@@ -44,21 +62,76 @@
 		display: flex;
 		justify-content: center;
 		box-sizing: border-box;
-		z-index: 10;
+		z-index: 1000;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+		transition: transform 0.3s ease-in-out;
+	}
+	.hamburger-menu {
+		display:none;
 	}
 
+	/* Hide Sidebar on Small Screens */
+	@media (max-width: 900px) {
+		nav {
+			position: fixed;
+			left: 0;
+			top: 0;
+			height: 100vh;
+			transform: translateX(-100%);
+			width: 250px;
+			// background: rgba(0, 0, 0, 0.95);
+			box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		/* Show Sidebar when Open */
+		nav.is-hidden {
+			transform: translateX(0);
+		}
+
+		/* Hamburger Menu Button */
+		.hamburger-menu {
+			position: fixed;
+			top: 20px;
+			left: 20px;
+			background: transparent;
+			border: none;
+			font-size: 30px;
+			cursor: pointer;
+			color: white;
+			z-index: 1001;
+		}
+	}
+
+	/* Main Content */
 	main {
 		flex-grow: 1;
+		position: relative;
+		transition: background 0.3s ease-in-out;
+		z-index: 1;
 	}
 
-	.colored-line {
-		height: 4px;
-		background-color: $primary-red; /* Your chosen color */
+	/* Darken Main Content When Sidebar is Open */
+	.blurred {
+		background: rgba(0, 0, 0, 0.5); /* Darkened effect */
+	}
+
+	/* Overlay (clicking closes sidebar) */
+	.overlay {
 		position: fixed;
 		top: 0;
 		left: 0;
-		transition: width 0.25s ease-out;
-		z-index: 100; /* Ensure it's above other content */
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.5); /* Dark transparent overlay */
+		z-index: 1001; /* Behind sidebar */
+		transition: opacity 0.3s ease-in-out;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	/* Show Overlay When Sidebar is Open */
+	.overlay[overlay] {
+		opacity: 1;
+		pointer-events: all;
 	}
 </style>

@@ -187,15 +187,15 @@
 			<div class="cards-container">
 				<Card
 					title="Woodworking"
-					description="3 years of hobbiest woodworking"
+					description=""
 					svgMarkup={SVGIcons.woodworking}
 				/>
 
-				<Card
+				<!-- <Card
 					title="Photography"
-					description="10 years of hobbiest photography"
+					description=""
 					svgMarkup={SVGIcons.photo}
-				/>
+				/> -->
 			</div>
 		</div>
 	</div>
@@ -214,6 +214,9 @@
 		top: -100px;
 		.about-section {
 			margin-bottom: 2rem;
+			&#clients {
+				margin-bottom: 0;
+			}
 			&:first-of-type {
 				margin: 0;
 			}
@@ -297,4 +300,5 @@
 		position: relative;
 		bottom: -40px;
 	}
+
 </style>
