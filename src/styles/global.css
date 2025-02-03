@@ -96,3 +96,7 @@ a {
 	animation: slideInFromLeft 1s ease-out forwards;
 	/* 'forwards' will persist the final state */
 }
+.overlap-content {
+	position: relative;
+	bottom: -40px;
+}

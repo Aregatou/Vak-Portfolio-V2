@@ -2,10 +2,11 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	// Prop to control the visibility of the modal
 	export let showModal = false;
+	export let title = '';
+	export let width = '500px';
+	export let showCloseButton = true;
 
-	// Function to close the modal
 	function close() {
 		dispatch('close');
 	}
@@ -13,16 +14,21 @@
 
 {#if showModal}
 	<div class="modal-overlay" on:click={close}>
-		<div class="modal-body" on:click|stopPropagation>
-			<button class="modal-close" on:click={close}>×</button>
+		<div class="modal-body" style="max-width: {width}" on:click|stopPropagation>
+			{#if showCloseButton}
+				<button class="modal-close" on:click={close}>×</button>
+			{/if}
 
-			<!-- Place your Splide carousel here -->
+			{#if title}
+				<h2 class="modal-title">{title}</h2>
+			{/if}
+
 			<slot />
 		</div>
 	</div>
 {/if}
 
-<style>
+<style lang="scss">
 	.modal-overlay {
 		position: fixed;
 		top: 0;
@@ -40,10 +46,16 @@
 		position: relative;
 		background-color: white;
 		padding: 20px;
-		border-radius: 4px;
-		max-width: 90%;
+		border-radius: 8px;
 		max-height: 90%;
 		overflow: auto;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+	}
+
+	.modal-title {
+		margin-bottom: 15px;
+		font-size: 1.5rem;
+		text-align: center;
 	}
 
 	.modal-close {

@@ -4,12 +4,30 @@
 	export let description;
 	export let color = '#e04343';
 	export let hoverColor = 'white';
+
+	let svgContent = '';
+
+	async function loadSVG() {
+		try {
+			const response = await fetch(svgMarkup);
+			if (!response.ok) throw new Error(`Failed to load SVG: ${svgMarkup}`);
+			let rawSVG = await response.text();
+
+			svgContent = rawSVG.replace(/fill="currentColor"/g, '');
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	loadSVG();
 </script>
 
 <div class="card" style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}>
 	<div class="card-image">
 		<div class="card-image-circle">
-			{@html svgMarkup}
+			<div class="card-icon-container">
+				{@html svgContent}
+			</div>
 		</div>
 	</div>
 	<div class="card-content">
