@@ -1,8 +1,10 @@
 <script>
 	import Navbar from '$components/navbar.svelte';
+	import HamburgerToggle from '$components/ui/hamburgerToggle.svelte';
 	import { onMount } from 'svelte';
 
 	let lineWidth = '100%';
+	let navOpen = false;
 
 	const updateLineWidth = () => {
 		const scrollPercentage =
@@ -10,9 +12,33 @@
 		lineWidth = `${100 - scrollPercentage}%`;
 	};
 
+	const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
+
+	const toggleNav = () => {
+		navOpen = !navOpen;
+		if (navOpen) {
+			const scrollbarWidth = getScrollbarWidth();
+			document.body.style.overflow = 'hidden';
+			document.body.style.paddingRight = `${scrollbarWidth}px`;
+		} else {
+			document.body.style.overflow = '';
+			document.body.style.paddingRight = '';
+		}
+	};
+
 	onMount(() => {
 		window.addEventListener('scroll', updateLineWidth);
+		const handleResize = () => {
+			if (window.innerWidth >= 1024 && navOpen) {
+				navOpen = false;
+				document.body.style.overflow = '';
+				document.body.style.paddingRight = '';
+			}
+		};
 
+		handleResize();
+
+		window.addEventListener('resize', handleResize);
 		const handleClick = (e) => {
 			const anchor = e.target.closest('a[href^="#"]');
 			if (anchor) {
@@ -28,21 +54,27 @@
 				}
 			}
 		};
-
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
-
 		return () => {
 			window.removeEventListener('scroll', updateLineWidth);
 			document.removeEventListener('click', handleClick, { capture: true });
+			document.body.style.overflow = '';
+			document.body.style.paddingRight = '';
 		};
 	});
 </script>
 
 <div class="colored-line" style="width: {lineWidth};" />
 
-<nav>
+<HamburgerToggle {navOpen} {toggleNav} />
+
+<nav class:open={navOpen}>
 	<Navbar />
 </nav>
+
+{#if navOpen}
+	<div class="overlay" on:click={toggleNav} />
+{/if}
 
 <main>
 	<slot />
@@ -52,6 +84,23 @@
 
 <style lang="scss">
 	@import '$styles/global.css';
+	@import '_variables.scss';
+
+	@mixin respond-to($breakpoint) {
+		@if $breakpoint == mobile {
+			@media (max-width: ($breakpoint-lg - 1)) {
+				@content;
+			}
+		} @else if $breakpoint == desktop {
+			@media (min-width: $breakpoint-lg) {
+				@content;
+			}
+		} @else if $breakpoint == extra-small {
+			@media (max-width: $breakpoint-xs) {
+				@content;
+			}
+		}
+	}
 
 	.colored-line {
 		height: 4px;
@@ -85,5 +134,47 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	@include respond-to(mobile) {
+		.nav-toggle {
+			display: block;
+			position: fixed;
+			top: 10px;
+			left: 10px;
+			background: none;
+			border: none;
+			font-size: 2rem;
+			z-index: 104;
+			color: $primary-red;
+			cursor: pointer;
+		}
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100vh;
+			transform: translateX(-100%);
+			transition: transform 0.3s ease-out;
+			z-index: 103;
+		}
+		nav.open {
+			transform: translateX(0);
+		}
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.3);
+			z-index: 101;
+		}
+	}
+
+	@include respond-to(desktop) {
+		.nav-toggle {
+			display: none;
+		}
 	}
 </style>

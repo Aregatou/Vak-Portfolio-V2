@@ -42,9 +42,11 @@
 		color: inherit;
 		overflow: hidden;
 		display: flex;
-		flex-direction: column;
 		flex: 1;
 		--card-svg-color: var(--svg-color);
+		flex-direction: row;
+		align-items: flex-start;
+
 		&:hover {
 			--card-svg-color: var(--hover-svg-color);
 			.card-image-circle {
@@ -55,6 +57,7 @@
 				}
 			}
 		}
+
 		.card-image {
 			display: flex;
 			justify-content: center;
@@ -64,8 +67,8 @@
 				border: 2px solid $primary-red;
 				border-radius: 50%;
 				padding: $pad-1 * 2;
-				width: 70px;
-				height: 70px;
+				width: 40px;
+				height: 40px;
 				color: var(--card-svg-color);
 				transition: $ease-transform, background-color 0.3s ease, color 0.3s ease;
 				:global(svg) {
@@ -75,20 +78,50 @@
 					transition: transform 0.3s ease, fill 0.3s ease;
 					transform-origin: center;
 				}
+				@include respond-to(desktop) {
+					width: 70px;
+					height: 70px;
+				}
 			}
 		}
+
 		.card-content {
 			padding: $pad-1;
+			margin: auto;
 			.card-title {
 				margin-top: 0;
-				margin-bottom: 1em;
-				min-height: 2em;
-				height: 2.5em;
-				text-align: center;
-				font-size: 1.4rem;
+				text-align: left;
+				font-size: 1.2rem;
 			}
 			.card-description {
-				text-align: center;
+				text-align: left;
+			}
+			@include respond-to(desktop) {
+				.card-title {
+					text-align: center;
+					margin-bottom: 1em;
+					min-height: 2em;
+					height: 2.5em;
+					font-size: 1.4rem;
+				}
+				.card-description {
+					text-align: center;
+				}
+			}
+		}
+
+		@include respond-to(desktop) {
+			flex-direction: column;
+			align-items: center;
+			.card-image {
+				margin-right: $pad-1;
+				padding: $pad-1 0 $pad-1 0;
+				justify-content: flex-start;
+			}
+			.card-content {
+				flex: 1;
+				text-align: left;
+				padding: $pad-1;
 			}
 		}
 	}

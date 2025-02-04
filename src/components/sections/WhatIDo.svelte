@@ -30,7 +30,7 @@
 		<h4>What I <span>do</span></h4>
 	</div>
 	<div class="about-section-content">
-		<div class="cards-container">
+		<div class="cards-container outlined">
 			{#each cards as card}
 				<Card title={card.title} description={card.description} svgMarkup={card.icon} />
 			{/each}
@@ -58,8 +58,22 @@
 
 		.about-section-content {
 			.cards-container {
+				position: relative;
+				bottom: 40px;
 				display: flex;
 				justify-content: space-evenly;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 1rem;
+				margin: 0 auto;
+				padding: 3rem 1rem 1rem;
+				border-radius: $radius-left;
+				@include container-outline();
+
+				@include respond-to(desktop) {
+					flex-direction: row;
+					align-items: flex-start;
+				}
 			}
 			.skills {
 				display: flex;
