@@ -1,6 +1,5 @@
 <script>
 	import Navbar from '$components/navbar.svelte';
-
 	import { onMount } from 'svelte';
 
 	let lineWidth = '100%';
@@ -13,7 +12,29 @@
 
 	onMount(() => {
 		window.addEventListener('scroll', updateLineWidth);
-		return () => window.removeEventListener('scroll', updateLineWidth);
+
+		const handleClick = (e) => {
+			const anchor = e.target.closest('a[href^="#"]');
+			if (anchor) {
+				e.preventDefault();
+				const targetId = anchor.getAttribute('href');
+				const target = document.querySelector(targetId);
+				if (target) {
+					target.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+					window.history.pushState(null, '', targetId);
+				}
+			}
+		};
+
+		document.addEventListener('click', handleClick, { capture: true, passive: false });
+
+		return () => {
+			window.removeEventListener('scroll', updateLineWidth);
+			document.removeEventListener('click', handleClick, { capture: true });
+		};
 	});
 </script>
 

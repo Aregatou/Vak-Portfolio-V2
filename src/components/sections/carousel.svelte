@@ -3,6 +3,9 @@
 	import '@splidejs/svelte-splide/css';
 	import { lazyLoadImage } from '$lib';
 
+	export let loadingMessage = '';
+	export let loading = false;
+
 	let activeIndex = 0;
 
 	const captions = [
@@ -76,6 +79,13 @@
 			<span class="accent">I<span class="subtle">'</span>m vak.com</span>
 		</h1>
 	</div>
+
+	{#if loading}
+		<div class="carousel-loading">
+			<div class="spinner" />
+			<p>{loadingMessage}</p>
+		</div>
+	{/if}
 </section>
 
 <style lang="scss">
@@ -153,6 +163,32 @@
 
 				&.accent {
 					border-bottom: 5px solid $primary-red;
+				}
+			}
+		}
+		.carousel-loading {
+			position: absolute;
+			bottom: 10%;
+			z-index: 3;
+			width: 100%;
+			p {
+				text-align: center;
+			}
+			.spinner {
+				border: 4px solid rgba(255, 255, 255, 0.3);
+				border-top: 4px solid white;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				animation: spin 1s linear infinite;
+				margin: 0 auto;
+			}
+			@keyframes spin {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
 				}
 			}
 		}

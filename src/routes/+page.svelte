@@ -1,9 +1,28 @@
 <script>
 	import Carousel from '$components/sections/Carousel.svelte';
 	import { onMount } from 'svelte';
+	import { loadingMessages } from '$lib';
 
 	let sections = {};
+	let randomLoadingMessage = '';
+	let loading = true;
 
+	function pickRandomMessage() {
+		let lastIndex = parseInt(localStorage.getItem('lastLoadingMessageIndex'), 10);
+		if (isNaN(lastIndex)) lastIndex = -1;
+		let newIndex;
+
+		if (loadingMessages.length > 1) {
+			do {
+				newIndex = Math.floor(Math.random() * loadingMessages.length);
+			} while (newIndex === lastIndex);
+		} else {
+			newIndex = 0;
+		}
+
+		localStorage.setItem('lastLoadingMessageIndex', newIndex);
+		return loadingMessages[newIndex];
+	}
 	async function loadSections() {
 		const modules = await Promise.all([
 			import('$components/sections/AboutMe.svelte'),
@@ -22,12 +41,19 @@
 			WhatILike: modules[4].default,
 			ArtSection: modules[5].default
 		};
+
+		setTimeout(() => {
+			loading = false;
+		}, 1200);
 	}
 
-	onMount(loadSections);
+	onMount(() => {
+		randomLoadingMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+		loadSections();
+	});
 </script>
 
-<Carousel />
+<Carousel loadingMessage={randomLoadingMessage} {loading} />
 
 {#if Object.keys(sections).length > 0}
 	<div id="sections">
@@ -35,8 +61,6 @@
 			<svelte:component this={SectionComponent} />
 		{/each}
 	</div>
-{:else}
-	<p>Loading content...</p>
 {/if}
 
 <style lang="scss">
