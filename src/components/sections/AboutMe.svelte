@@ -2,11 +2,11 @@
 	import { fadeIn } from '$lib';
 </script>
 
-<section id="about-me" class="about-section fade-in-section" use:fadeIn>
-	<div class="about-section-header overlap-content">
+<section id="about-me" class="fade-in-section" use:fadeIn>
+	<div class="section-header overlap-content">
 		<h4><span>Vak</span>htang Kobiashvili</h4>
 	</div>
-	<div class="about-section-content outlined">
+	<div class="section-content outlined">
 		<p>I build creative stuff that looks pretty good.</p>
 		<p>
 			For <strong>9 years</strong>, I've been working with
@@ -24,16 +24,18 @@
 </section>
 
 <style lang="scss">
-	#about-me {
-		@include about-section-styles();
-
+	section {
 		margin: 0;
-		.about-section-header {
+		.section-header {
+			@include section-header-styles();
+
 			span {
 				color: $primary-yellow;
 			}
 		}
-		.about-section-content {
+		.section-content {
+			@include section-content-styles();
+
 			color: $white;
 			padding: $pad-1 * 3;
 			font-size: 1.3rem;

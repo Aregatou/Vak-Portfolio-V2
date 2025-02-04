@@ -2,11 +2,11 @@
 	import { fadeIn } from '$lib';
 </script>
 
-<section id="clients" class="about-section fade-in-section" use:fadeIn>
-	<div class="about-section-header overlap-content">
+<section id="clients" class="fade-in-section" use:fadeIn>
+	<div class="section-header overlap-content">
 		<h4>Clients</h4>
 	</div>
-	<div class="about-section-content clients-container">
+	<div class="section-content clients-container">
 		<p>
 			Prioritizing client needs means collaborating with team members, project managers, and
 			organization staff directly.
@@ -18,17 +18,17 @@
 </section>
 
 <style lang="scss">
-	.about-section {
-		@include about-section-styles();
-		.about-section-content {
+	section {
+		.section-header {
+			@include section-header-styles();
+		}
+		.section-content {
+			@include section-content-styles();
 			background: $white;
 			border-radius: $radius-left;
 			padding: 3rem 2rem $pad-1 2rem;
 			font-size: 1.1rem;
 			margin-bottom: 0;
-			ul {
-				padding-left: 3rem;
-			}
 		}
 	}
 	/* .client-list {

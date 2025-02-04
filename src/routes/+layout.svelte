@@ -73,7 +73,13 @@
 </nav>
 
 {#if navOpen}
-	<div class="overlay" on:click={toggleNav} />
+	<div
+		class="overlay"
+		role="button"
+		tabindex="0"
+		on:click={toggleNav}
+		on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && toggleNav()}
+	/>
 {/if}
 
 <main>
@@ -137,18 +143,6 @@
 	}
 
 	@include respond-to(mobile) {
-		.nav-toggle {
-			display: block;
-			position: fixed;
-			top: 10px;
-			left: 10px;
-			background: none;
-			border: none;
-			font-size: 2rem;
-			z-index: 104;
-			color: $primary-red;
-			cursor: pointer;
-		}
 		nav {
 			position: fixed;
 			top: 0;
@@ -169,12 +163,6 @@
 			height: 100vh;
 			background: rgba(0, 0, 0, 0.3);
 			z-index: 101;
-		}
-	}
-
-	@include respond-to(desktop) {
-		.nav-toggle {
-			display: none;
 		}
 	}
 </style>

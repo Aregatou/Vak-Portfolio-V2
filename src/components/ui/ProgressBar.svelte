@@ -41,7 +41,9 @@
 		</div>
 		<div class="progress-bar-container">
 			<div class="progress-bar" style="width: {visible ? percentage : 0}%;">
-				{visible ? `${percentage}%` : ''}
+				<span class="sr-only">
+					{visible ? `${percentage}%` : ''}
+				</span>
 			</div>
 		</div>
 	</div>
