@@ -3,11 +3,11 @@
 	import { fadeIn, SVGIcons } from '$lib';
 </script>
 
-<section id="whatilike" class="about-section fade-in-section" use:fadeIn>
-	<div class="about-section-header">
+<section id="whatilike" class="fade-in-section" use:fadeIn>
+	<div class="section-header">
 		<h4>What I <span>like</span></h4>
 	</div>
-	<div class="about-section-content cards-container">
+	<div class="section-content cards-container">
 		<div class="cards-container">
 			<Card title="Woodworking" description="" svgMarkup={SVGIcons.woodworking} />
 			<!-- Uncomment below if you decide to include Photography:
@@ -18,16 +18,17 @@
 </section>
 
 <style lang="scss">
-	.about-section {
-		@include about-section-styles();
-	}
-	.about-section {
-		.about-section-header {
+	section {
+		.section-header {
+			@include section-header-styles();
+
 			span {
 				color: $primary-yellow;
 			}
 		}
-		.about-section-content {
+		.section-content {
+			@include section-content-styles();
+
 			.cards-container {
 				display: flex;
 				justify-content: space-evenly;

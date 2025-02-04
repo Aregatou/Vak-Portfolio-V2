@@ -71,5 +71,8 @@
 		width: 100%;
 		top: -100px;
 		z-index: 2;
+		:global(section) {
+			margin-bottom: 2rem;
+		}
 	}
 </style>

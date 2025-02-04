@@ -25,11 +25,11 @@
 	];
 </script>
 
-<section id="whatido" class="about-section fade-in-section" use:fadeIn>
-	<div class="about-section-header overlap-content">
+<section id="whatido" class="fade-in-section" use:fadeIn>
+	<div class="section-header overlap-content">
 		<h4>What I <span>do</span></h4>
 	</div>
-	<div class="about-section-content">
+	<div class="section-content">
 		<div class="cards-container outlined">
 			{#each cards as card}
 				<Card title={card.title} description={card.description} svgMarkup={card.icon} />
@@ -53,10 +53,13 @@
 </section>
 
 <style lang="scss">
-	.about-section {
-		@include about-section-styles();
+	section {
+		.section-header {
+			@include section-header-styles();
+		}
+		.section-content {
+			@include section-content-styles();
 
-		.about-section-content {
 			.cards-container {
 				position: relative;
 				bottom: 40px;

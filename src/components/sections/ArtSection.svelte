@@ -2,15 +2,20 @@
 	import { fadeIn } from '$lib';
 </script>
 
-<section class="about-section fade-in-section" use:fadeIn>
-	<div class="about-section-header">
+<section class="fade-in-section" use:fadeIn>
+	<div class="section-header">
 		<h4>Art</h4>
 	</div>
-	<div class="about-section-content cards-container">test</div>
+	<div class="section-content cards-container">test</div>
 </section>
 
 <style lang="scss">
-	.about-section {
-		@include about-section-styles();
+	section {
+		.section-header {
+			@include section-header-styles();
+		}
+		.section-content {
+			@include section-content-styles();
+		}
 	}
 </style>

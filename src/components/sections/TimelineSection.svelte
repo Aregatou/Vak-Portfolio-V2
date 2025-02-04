@@ -43,8 +43,8 @@
 	});
 </script>
 
-<section id="timeline" class="about-section">
-	<div class="about-section-content">
+<section id="timeline">
+	<div class="section-content">
 		<div bind:this={timelineContainer} class="timeline-container">
 			{#each timelineExperiences as item, i (item.organization + '-' + item.period)}
 				<div
@@ -78,10 +78,10 @@
 </section>
 
 <style lang="scss">
-	.about-section {
-		@include about-section-styles();
+	section {
+		.section-content {
+			@include section-content-styles();
 
-		.about-section-content {
 			position: relative;
 			width: 90%;
 			margin: 0 auto;
