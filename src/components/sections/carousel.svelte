@@ -151,11 +151,16 @@
 			transform: translate(-50%, -50%);
 			text-align: center;
 			z-index: $zindex-content;
-			font-size: 2rem;
+			font-size: 1.7rem;
 			font-family: 'Quicksand-bold';
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 			pointer-events: none;
-
+			width: 80%;
+			line-height: initial;
+			@include respond-to(desktop) {
+				width: 100%;
+				font-size: 2rem;
+			}
 			span {
 				&.subtle {
 					opacity: 0.6;

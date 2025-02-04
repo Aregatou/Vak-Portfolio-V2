@@ -210,13 +210,12 @@
 				font-weight: bold;
 				transition: background 0.3s ease;
 				font-size: 1.3rem;
-				@include container-outline($denim-black);
+				@include container-outline($denim-black, $white);
 
 				&:hover {
 					background: darken($primary-orange, 10%);
 				}
 				&.expanded {
-					@include container-outline($denim-black);
 				}
 			}
 		}

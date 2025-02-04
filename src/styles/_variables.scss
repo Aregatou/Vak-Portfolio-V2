@@ -34,13 +34,23 @@ $double-box-shadow: 0 0 0 2px $white, 0 0 0 4px $primary-red;
 $radius-left: 0 20px 20px 0;
 $curve-border: 16px;
 
-@mixin container-outline($col) {
+:root {
+	--highlight-bg: #{$secondary-red};
+	--highlight-text: #{$white};
+}
+
+@mixin container-outline($bcolor: initial, $tcolor: initial) {
 	box-shadow: $double-box-shadow;
 	margin: $margin-1;
 	font-family: 'Quicksand';
 	display: flex;
 	border-radius: $curve-border;
-	background-color: $col;
+	@if $bcolor != null {
+		background-color: $bcolor;
+		color: $tcolor;
+	} @else {
+		background-color: none;
+	}
 }
 
 @mixin anchor-underline {
@@ -81,6 +91,7 @@ $curve-border: 16px;
 		font-size: 2.5rem;
 		font-family: 'Quicksand-med';
 		text-transform: uppercase;
+		z-index: 1;
 
 		h4 {
 			margin: 1rem;
@@ -93,9 +104,26 @@ $curve-border: 16px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
+	}
+}
+$breakpoint-xs: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
 
-		&.outlined {
-			@include container-outline($denim-black);
+@mixin respond-to($breakpoint) {
+	@if $breakpoint == mobile {
+		// screens smaller than $breakpoint-lg
+		@media (max-width: ($breakpoint-lg - 1)) {
+			@content;
+		}
+	} @else if $breakpoint == desktop {
+		// screens at or above $breakpoint-lg
+		@media (min-width: $breakpoint-lg) {
+			@content;
+		}
+	} @else if $breakpoint == extra-small {
+		@media (max-width: $breakpoint-xs) {
+			@content;
 		}
 	}
 }

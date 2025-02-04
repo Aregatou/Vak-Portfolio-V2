@@ -45,7 +45,13 @@ body {
 	line-height: 1.5;
 	background: #f5efed;
 	background-image: url('/images/fabric.png');
+	background-attachment: fixed;
 	background-repeat: repeat;
+}
+
+::selection {
+	background: var(--highlight-bg);
+	color: var(--highlight-text);
 }
 
 #content {

@@ -37,6 +37,8 @@
 			color: $white;
 			padding: $pad-1 * 3;
 			font-size: 1.3rem;
+			@include container-outline($denim-black, $white);
+
 			a {
 				@include anchor-underline;
 			}

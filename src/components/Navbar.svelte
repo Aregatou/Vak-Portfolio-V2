@@ -55,6 +55,9 @@
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 			font-weight: 500;
 		}
+		h4 {
+			font-style: italic;
+		}
 		ul {
 			padding: 0;
 			text-align: center;
