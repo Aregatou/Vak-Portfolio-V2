@@ -1,4 +1,9 @@
 <script>
+	import { onMount, createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+	export let mode = 'icon';
+	export let image;
 	export let svgMarkup;
 	export let title;
 	export let description;
@@ -12,23 +17,39 @@
 			const response = await fetch(svgMarkup);
 			if (!response.ok) throw new Error(`Failed to load SVG: ${svgMarkup}`);
 			let rawSVG = await response.text();
-
 			svgContent = rawSVG.replace(/fill="currentColor"/g, '');
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
-	loadSVG();
+	onMount(() => {
+		if (mode === 'icon' && svgMarkup) {
+			loadSVG();
+		}
+	});
+
+	function handleClick(event) {
+		console.log('Card clicked:', title);
+		dispatch('cardclick', event);
+	}
 </script>
 
-<div class="card" style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}>
+<div
+	class="card {mode === 'gallery' ? 'gallery-mode' : 'card-mode'}"
+	style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}
+	on:click={handleClick}
+>
 	<div class="card-image">
-		<div class="card-image-circle">
-			<div class="card-icon-container">
-				{@html svgContent}
+		{#if mode === 'gallery' && image}
+			<img src={image} alt={title + ' preview'} class="card-hero-image" loading="lazy" />
+		{:else}
+			<div class="card-image-circle">
+				<div class="card-icon-container">
+					{@html svgContent}
+				</div>
 			</div>
-		</div>
+		{/if}
 	</div>
 	<div class="card-content">
 		<h2 class="card-title">{title}</h2>
@@ -42,10 +63,51 @@
 		color: inherit;
 		overflow: hidden;
 		display: flex;
-		flex: 1;
 		--card-svg-color: var(--svg-color);
 		flex-direction: row;
 		align-items: flex-start;
+
+		&.gallery-mode {
+			max-width: 250px;
+			flex-direction: column;
+			align-items: center;
+			background: $amethyst;
+			border-radius: $curve-border;
+			cursor: pointer;
+			transition: box-shadow 0.3s ease;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+			bottom: 0;
+			transition: bottom 0.3s ease, box-shadow 0.3s ease;
+			position: relative;
+			&:hover {
+				bottom: 10px;
+				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.65);
+			}
+			.card-image {
+				width: 100%;
+				aspect-ratio: 1;
+				overflow: hidden;
+
+				.card-hero-image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					border-radius: 5px;
+					transform: scale(1.2);
+					transition: transform 0.3s ease;
+					&:hover {
+						/* transform: scale(1.3); */
+					}
+				}
+			}
+			.card-content {
+				padding: 0.5rem;
+				h2 {
+					margin-top: 0;
+					font-size: 1.3rem;
+				}
+			}
+		}
 
 		&:hover {
 			--card-svg-color: var(--hover-svg-color);
@@ -58,70 +120,70 @@
 			}
 		}
 
-		.card-image {
-			display: flex;
-			justify-content: center;
-			padding: $pad-1;
-			padding-bottom: 0;
-			.card-image-circle {
-				border: 2px solid $primary-red;
-				border-radius: 50%;
-				padding: $pad-1 * 2;
-				width: 40px;
-				height: 40px;
-				color: var(--card-svg-color);
-				transition: $ease-transform, background-color 0.3s ease, color 0.3s ease;
-				:global(svg) {
-					fill: currentColor;
-					width: 100%;
-					height: 100%;
-					transition: transform 0.3s ease, fill 0.3s ease;
-					transform-origin: center;
-				}
-				@include respond-to(desktop) {
-					width: 70px;
-					height: 70px;
-				}
-			}
-		}
-
-		.card-content {
-			padding: $pad-1;
-			margin: auto;
-			.card-title {
-				margin-top: 0;
-				text-align: left;
-				font-size: 1.2rem;
-			}
-			.card-description {
-				text-align: left;
-			}
-			@include respond-to(desktop) {
-				.card-title {
-					text-align: center;
-					margin-bottom: 1em;
-					min-height: 2em;
-					height: 2.5em;
-					font-size: 1.4rem;
-				}
-				.card-description {
-					text-align: center;
-				}
-			}
-		}
-
-		@include respond-to(desktop) {
-			flex-direction: column;
-			align-items: center;
+		&.card-mode {
 			.card-image {
-				margin-right: $pad-1;
-				padding: $pad-1 0 $pad-1 0;
-				justify-content: flex-start;
+				display: flex;
+				justify-content: center;
+				padding: $pad-1;
+				padding-bottom: 0;
+				.card-image-circle {
+					border: 2px solid $primary-red;
+					border-radius: 50%;
+					padding: $pad-1 * 2;
+					width: 40px;
+					height: 40px;
+					color: var(--card-svg-color);
+					transition: $ease-transform, background-color 0.3s ease, color 0.3s ease;
+					:global(svg) {
+						fill: currentColor;
+						width: 100%;
+						height: 100%;
+						transition: transform 0.3s ease, fill 0.3s ease;
+						transform-origin: center;
+					}
+					@include respond-to(desktop) {
+						width: 70px;
+						height: 70px;
+					}
+				}
 			}
 			.card-content {
-				flex: 1;
-				text-align: left;
 				padding: $pad-1;
+				margin: auto;
+				.card-title {
+					margin-top: 0;
+					text-align: left;
+					font-size: 1.2rem;
+				}
+				.card-description {
+					text-align: left;
+				}
+				@include respond-to(desktop) {
+					.card-title {
+						text-align: center;
+						margin-bottom: 1em;
+						min-height: 2em;
+						height: 2.5em;
+						font-size: 1.4rem;
+					}
+					.card-description {
+						text-align: center;
+					}
+				}
+			}
+			@include respond-to(desktop) {
+				flex-direction: column;
+				align-items: center;
+				.card-image {
+					margin-right: $pad-1;
+					padding: $pad-1 0 $pad-1 0;
+					justify-content: flex-start;
+				}
+				.card-content {
+					flex: 1;
+					text-align: left;
+					padding: $pad-1;
+				}
 			}
 		}
 	}

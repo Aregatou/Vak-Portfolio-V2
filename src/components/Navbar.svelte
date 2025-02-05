@@ -10,10 +10,10 @@
 	<ul>
 		<li><a href="#home">Home</a></li>
 		<li><a href="#about-me">About Me</a></li>
-		<li><a href="#whatido">What I Do</a></li>
+		<li><a href="#WhatIDo">What I Do</a></li>
 		<!-- <li><a href="#tech">Tech Skills</a></li> -->
 		<li><a href="#clients">Clients</a></li>
-		<li><a href="#whatilike">What I Like</a></li>
+		<li><a href="#WhatICraft">What I Like</a></li>
 	</ul>
 	<ul>
 		<li><a href="https://www.linkedin.com/in/vak-k/" target="_blank">LinkedIn</a></li>

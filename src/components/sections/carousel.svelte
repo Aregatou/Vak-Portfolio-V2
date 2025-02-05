@@ -94,6 +94,7 @@
 
 	.carousel-container {
 		width: 100%;
+		align-self: stretch;
 		position: relative;
 		border-radius: 0 20px 20px 0;
 		overflow: hidden;

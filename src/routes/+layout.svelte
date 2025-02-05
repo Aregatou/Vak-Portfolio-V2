@@ -12,17 +12,16 @@
 		lineWidth = `${100 - scrollPercentage}%`;
 	};
 
-	const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
+	// const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
 
 	const toggleNav = () => {
 		navOpen = !navOpen;
-		if (navOpen) {
-			const scrollbarWidth = getScrollbarWidth();
-			document.body.style.overflow = 'hidden';
-			document.body.style.paddingRight = `${scrollbarWidth}px`;
+		if (navOpen && window.innerWidth < 1024) {
+			document.body.classList.add('no-scroll');
+			document.documentElement.classList.add('no-scroll');
 		} else {
-			document.body.style.overflow = '';
-			document.body.style.paddingRight = '';
+			document.body.classList.remove('no-scroll');
+			document.documentElement.classList.remove('no-scroll');
 		}
 	};
 
@@ -32,13 +31,13 @@
 			if (window.innerWidth >= 1024 && navOpen) {
 				navOpen = false;
 				document.body.style.overflow = '';
-				document.body.style.paddingRight = '';
 			}
 		};
 
 		handleResize();
 
 		window.addEventListener('resize', handleResize);
+
 		const handleClick = (e) => {
 			const anchor = e.target.closest('a[href^="#"]');
 			if (anchor) {
@@ -46,20 +45,18 @@
 				const targetId = anchor.getAttribute('href');
 				const target = document.querySelector(targetId);
 				if (target) {
-					target.scrollIntoView({
-						behavior: 'smooth',
-						block: 'start'
-					});
+					target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 					window.history.pushState(null, '', targetId);
 				}
 			}
 		};
+
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
 		return () => {
 			window.removeEventListener('scroll', updateLineWidth);
+			window.removeEventListener('resize', handleResize);
 			document.removeEventListener('click', handleClick, { capture: true });
 			document.body.style.overflow = '';
-			document.body.style.paddingRight = '';
 		};
 	});
 </script>
@@ -89,25 +86,6 @@
 <footer />
 
 <style lang="scss">
-	@import '$styles/global.css';
-	@import '_variables.scss';
-
-	@mixin respond-to($breakpoint) {
-		@if $breakpoint == mobile {
-			@media (max-width: ($breakpoint-lg - 1)) {
-				@content;
-			}
-		} @else if $breakpoint == desktop {
-			@media (min-width: $breakpoint-lg) {
-				@content;
-			}
-		} @else if $breakpoint == extra-small {
-			@media (max-width: $breakpoint-xs) {
-				@content;
-			}
-		}
-	}
-
 	.colored-line {
 		height: 4px;
 		background-color: $primary-orange;
@@ -133,13 +111,15 @@
 	}
 
 	main {
+		width: 100%;
 		flex-grow: 1;
 		position: relative;
 		transition: background 0.3s ease-in-out;
 		z-index: 1;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		z-index: 3;
+		align-items: stretch;
 	}
 
 	@include respond-to(mobile) {
@@ -164,5 +144,9 @@
 			background: rgba(0, 0, 0, 0.3);
 			z-index: 101;
 		}
+	}
+	:global(body.no-scroll),
+	:global(html.no-scroll) {
+		overflow: hidden !important;
 	}
 </style>

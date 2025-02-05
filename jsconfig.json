@@ -11,10 +11,11 @@
 		"strict": true,
 		"baseUrl": ".",
 		"paths": {
-		  "$lib/*": ["src/lib/*"],
-		  "$lib":["./src/lib"],
-		  "$components/*": ["./src/components/*"],
-		  "$styles/*": ["./src/styles/*"]
+			"$lib/*": ["src/lib/*"],
+			"$lib": ["./src/lib"],
+			"$components/*": ["./src/components/*"],
+			"$data/*": ["./src/data/*"],
+			"$styles/*": ["./src/styles/*"]
 		}
 	},
 	"include": ["src/**/*"]

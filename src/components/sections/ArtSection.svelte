@@ -6,7 +6,6 @@
 	<div class="section-header">
 		<h4>Art</h4>
 	</div>
-	<div class="section-content cards-container">test</div>
 </section>
 
 <style lang="scss">

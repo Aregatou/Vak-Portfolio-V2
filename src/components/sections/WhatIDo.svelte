@@ -25,14 +25,14 @@
 	];
 </script>
 
-<section id="whatido" class="fade-in-section" use:fadeIn>
+<section id="WhatIDo" class="fade-in-section" use:fadeIn>
 	<div class="section-header overlap-content">
 		<h4>What I <span>do</span></h4>
 	</div>
 	<div class="section-content">
 		<div class="cards-container outlined">
 			{#each cards as card}
-				<Card title={card.title} description={card.description} svgMarkup={card.icon} />
+				<Card title={card.title} description={card.description} svgMarkup={card.icon} mode="icon" />
 			{/each}
 		</div>
 		<div class="skills">
