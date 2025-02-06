@@ -80,8 +80,10 @@
 			}
 			.skills {
 				display: flex;
+				flex-wrap: wrap;
 				.column {
 					flex: 1;
+					min-width:350px;
 				}
 			}
 		}

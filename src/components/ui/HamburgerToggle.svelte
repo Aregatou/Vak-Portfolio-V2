@@ -30,6 +30,7 @@
 		cursor: pointer;
 		z-index: 105;
 
+
 		.cs-square {
 			position: relative;
 			width: 100%;
@@ -41,6 +42,8 @@
 			background: $primary-orange;
 			border-radius: 8px;
 			padding: 0.5rem;
+			box-shadow: 0 0 12px rgba(0, 0, 0, 0.55);
+
 		}
 
 		.cs-box {

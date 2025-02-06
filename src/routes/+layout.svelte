@@ -31,6 +31,8 @@
 			if (window.innerWidth >= 1024 && navOpen) {
 				navOpen = false;
 				document.body.style.overflow = '';
+				document.body.classList.remove('no-scroll');
+				document.documentElement.classList.remove('no-scroll');
 			}
 		};
 

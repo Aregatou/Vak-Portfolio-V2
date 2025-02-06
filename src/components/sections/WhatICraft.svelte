@@ -62,11 +62,15 @@
 		console.log('openProject triggered:', project);
 		activeProject = project;
 		showModal = true;
+		document.body.classList.add('no-scroll');
+		document.documentElement.classList.add('no-scroll');
 	}
 
 	function closeModal() {
 		showModal = false;
 		activeProject = null;
+		document.body.classList.remove('no-scroll');
+		document.documentElement.classList.remove('no-scroll');
 	}
 </script>
 

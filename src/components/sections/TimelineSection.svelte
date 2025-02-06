@@ -85,7 +85,7 @@
 			position: relative;
 			width: 90%;
 			margin: 0 auto;
-			padding: 1rem 0;
+			padding: 0;
 			overflow: hidden;
 		}
 
@@ -99,8 +99,8 @@
 				position: absolute;
 				top: 0;
 				bottom: 0;
-				left: 50%;
-				width: 2px;
+				left: calc(50% + 1px);
+				width: 3px;
 				background-color: $white;
 				transform: translateX(-50%);
 				z-index: 0;

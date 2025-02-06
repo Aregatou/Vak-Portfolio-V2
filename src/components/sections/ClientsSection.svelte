@@ -18,7 +18,9 @@
 </section>
 
 <style lang="scss">
-	section {
+	section#clients {
+		margin-bottom:0;
+		padding-left: 0;
 		.section-header {
 			@include section-header-styles();
 		}
