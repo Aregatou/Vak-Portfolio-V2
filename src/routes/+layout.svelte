@@ -100,7 +100,7 @@
 
 	nav {
 		width: 300px;
-		background-image: url('/images/denim.png');
+		background-image: var(--background-nav);
 		background-repeat: repeat;
 		padding: 10px;
 		color: $primary-red;

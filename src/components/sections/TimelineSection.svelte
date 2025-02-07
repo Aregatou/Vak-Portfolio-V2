@@ -101,7 +101,7 @@
 				bottom: 0;
 				left: calc(50% + 1px);
 				width: 3px;
-				background-color: $white;
+				background-color: var(--white);
 				transform: translateX(-50%);
 				z-index: 0;
 			}
@@ -154,7 +154,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: center;
-						background: $white;
+						background: var(--container-bg);
 						padding: 1rem;
 						border-radius: $curve-border;
 						transition: box-shadow 0.3s ease;
@@ -210,7 +210,7 @@
 				font-weight: bold;
 				transition: background 0.3s ease;
 				font-size: 1.3rem;
-				@include container-outline($denim-black, $white);
+				@include container-outline(var(--container-outline-bg), var(--container-outline-text));
 
 				&:hover {
 					background: darken($primary-orange, 10%);

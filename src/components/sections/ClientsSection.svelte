@@ -19,14 +19,14 @@
 
 <style lang="scss">
 	section#clients {
-		margin-bottom:0;
+		margin-bottom: 0;
 		padding-left: 0;
 		.section-header {
 			@include section-header-styles();
 		}
 		.section-content {
 			@include section-content-styles();
-			background: $white;
+			background: var(--container-bg);
 			border-radius: $radius-left;
 			padding: 3rem 2rem $pad-1 2rem;
 			font-size: 1.1rem;

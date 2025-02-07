@@ -104,10 +104,6 @@
 	section {
 		.section-header {
 			@include section-header-styles();
-
-			span {
-				color: $primary-yellow;
-			}
 		}
 		.section-content {
 			@include section-content-styles();

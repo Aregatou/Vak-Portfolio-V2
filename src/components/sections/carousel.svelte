@@ -20,7 +20,7 @@
 	}
 </script>
 
-<section class="carousel-container" id="home" aria-label="Carousel of images">
+<section class="carousel" id="home" aria-label="Carousel of images">
 	<div class="color-overlay" />
 
 	<Splide
@@ -89,10 +89,7 @@
 </section>
 
 <style lang="scss">
-	$zindex-overlay: 1;
-	$zindex-content: 2;
-
-	.carousel-container {
+	.carousel {
 		width: 100%;
 		align-self: stretch;
 		position: relative;
@@ -100,7 +97,7 @@
 		overflow: hidden;
 		min-height: 250px;
 		z-index: 1;
-		color: $white;
+		color: var(--text-on-dark-bg);
 
 		.color-overlay {
 			position: absolute;
@@ -138,7 +135,7 @@
 			text-align: center;
 			color: $white-transparent;
 			padding: 1em;
-			font-family: 'Quicksand-bold';
+			font-family: $font-bold;
 			text-shadow: $text-shadow;
 			font-size: 1.2rem;
 			z-index: 3;
@@ -151,9 +148,9 @@
 			color: $white;
 			transform: translate(-50%, -50%);
 			text-align: center;
-			z-index: $zindex-content;
+			z-index: 2;
 			font-size: 1.7rem;
-			font-family: 'Quicksand-bold';
+			font-family: $font-bold;
 			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 			pointer-events: none;
 			width: 80%;

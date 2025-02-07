@@ -28,18 +28,14 @@
 		margin: 0;
 		.section-header {
 			@include section-header-styles();
-
-			span {
-				color: $primary-yellow;
-			}
 		}
 		.section-content {
 			@include section-content-styles();
+			@include container-outline(var(--container-outline-bg), var(--container-outline-text));
 
-			color: $white;
+			color: var(--text-on-dark-bg);
 			padding: $pad-1 * 3;
 			font-size: 1.3rem;
-			@include container-outline($denim-black, $white);
 
 			a {
 				@include anchor-underline;

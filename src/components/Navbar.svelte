@@ -50,7 +50,7 @@
 		h4 {
 			margin: 0;
 			text-align: center;
-			color: $white;
+			color: var(--text-on-dark-bg);
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 			font-weight: 500;
 		}
@@ -61,20 +61,19 @@
 			padding: 0;
 			text-align: center;
 			list-style-type: none;
-			line-height:1.8;
+			line-height: 1.8;
 
 			a {
 				@include anchor-underline;
-				color: $white;
+				color: var(--text-on-dark-bg);
 				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 				display: inline-block;
 				vertical-align: middle;
 				font-weight: 400;
 				font-size: 1.4rem;
-
 			}
 			@include respond-to(desktop) {
-				line-height:1.5;
+				line-height: 1.5;
 
 				a {
 					font-size: 1.1rem;

@@ -1,17 +1,11 @@
 $primary-red: #e04343;
 $secondary-red: #b33535;
-
 $primary-orange: #ef3724;
-
 $white: #fff;
 $off-white: #f5efed;
-$white-transparent: rgba(255, 255, 255, 0.8);
-
 $primary-black: #0f0a0a;
 $denim-black: #3f3f3f;
-
 $primary-yellow: #ffe800;
-
 $primary-blue: #2292a4;
 $space-purple: #2e294e;
 $orange: #ff9000;
@@ -34,10 +28,12 @@ $double-box-shadow: 0 0 0 2px $white, 0 0 0 4px $primary-red;
 $radius-left: 0 20px 20px 0;
 $curve-border: 16px;
 
-:root {
-	--highlight-bg: #{$secondary-red};
-	--highlight-text: #{$white};
-}
+$white-transparent: rgba(255, 255, 255, 0.8);
+
+$font: 'Quicksand';
+$font-bold: 'Quicksand-bold';
+$font-med: 'Quicksand-med';
+$font-light: 'Quicksand-light';
 
 @mixin container-outline($bcolor: initial, $tcolor: initial) {
 	box-shadow: $double-box-shadow;
@@ -45,7 +41,7 @@ $curve-border: 16px;
 	font-family: 'Quicksand';
 	display: flex;
 	border-radius: $curve-border;
-	@if $bcolor != null {
+	@if $bcolor != initial {
 		background-color: $bcolor;
 		color: $tcolor;
 	} @else {
@@ -92,6 +88,9 @@ $curve-border: 16px;
 	h4 {
 		margin: 1rem;
 		letter-spacing: 0.1rem;
+		span {
+			color: var(--span-highlight);
+		}
 	}
 }
 @mixin section-content-styles() {
@@ -106,19 +105,37 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 
 @mixin respond-to($breakpoint) {
-	@if $breakpoint == mobile {
-		// screens smaller than $breakpoint-lg
+	@if $breakpoint == 'mobile' {
 		@media (max-width: ($breakpoint-lg - 1)) {
 			@content;
 		}
-	} @else if $breakpoint == desktop {
-		// screens at or above $breakpoint-lg
+	} @else if $breakpoint == 'desktop' {
 		@media (min-width: $breakpoint-lg) {
 			@content;
 		}
-	} @else if $breakpoint == extra-small {
+	} @else if $breakpoint == 'extra-small' {
 		@media (max-width: $breakpoint-xs) {
 			@content;
 		}
 	}
+}
+
+:root {
+	--primary-red: #{$primary-red};
+	--secondary-red: #{$secondary-red};
+	--primary-orange: #{$primary-orange};
+	--white: #{$white};
+
+	--off-white: #{$off-white};
+	--primary-black: #{$primary-black};
+	--highlight-bg: #{$secondary-red};
+	--highlight-text: #{$white};
+	--background-nav: url('/images/denim.png');
+	--background-body: url('/images/fabric.png');
+	--background-default: #{$off-white};
+	--span-highlight: #{$primary-yellow};
+	--text-on-dark-bg: #{$white};
+	--container-bg: #{$white};
+	--container-outline-bg: #{$denim-black};
+	--container-outline-text: #{$white};
 }

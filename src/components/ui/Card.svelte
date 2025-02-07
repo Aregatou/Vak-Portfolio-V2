@@ -113,7 +113,7 @@
 			--card-svg-color: var(--hover-svg-color);
 			.card-image-circle {
 				background: $primary-red;
-				color: $white;
+				color: var(--white);
 				:global(svg) {
 					transform: scale(1.15);
 				}

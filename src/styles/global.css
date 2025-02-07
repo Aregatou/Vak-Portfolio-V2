@@ -54,8 +54,8 @@ body {
 	margin: 0;
 	padding: 0;
 	line-height: 1.5;
-	background: #f5efed;
-	background-image: url('/images/fabric.png');
+	background: var(--background-default);
+	background-image: var(--background-body);
 	background-attachment: fixed;
 	background-repeat: repeat;
 }
@@ -73,7 +73,7 @@ body {
 }
 
 a {
-	color: #e04343;
+	color: var(--primary-red);
 }
 
 @keyframes fadeIn {
