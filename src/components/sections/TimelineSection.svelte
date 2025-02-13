@@ -71,22 +71,21 @@
 		</div>
 	</div>
 	<div class="timeline-toggle">
-		<button on:click={toggleTimeline} class:expanded={showFullTimeline}>
+		<button on:click={toggleTimeline} class="outlined" class:expanded={showFullTimeline}>
 			{showFullTimeline ? 'Show Less' : 'Show All'}
 		</button>
 	</div>
 </section>
 
 <style lang="scss">
-	section {
+	#timeline {
 		.section-content {
-			@include section-content-styles();
-
 			position: relative;
 			width: 90%;
 			margin: 0 auto;
 			padding: 0;
 			overflow: hidden;
+			padding-top: 0;
 		}
 
 		.timeline-container {
@@ -99,7 +98,7 @@
 				position: absolute;
 				top: 0;
 				bottom: 0;
-				left: calc(50% + 1px);
+				left: calc(50% - 1px);
 				width: 3px;
 				background-color: $white;
 				transform: translateX(-50%);
@@ -134,7 +133,7 @@
 			.timeline-content {
 				padding: 0.7rem;
 				border-radius: 4px;
-				font-weight: 600;
+				font-family: $font-med;
 				position: relative;
 
 				&.left {
@@ -155,6 +154,7 @@
 						align-items: center;
 						justify-content: center;
 						background: $white;
+						/* background: var(--container-bg); */
 						padding: 1rem;
 						border-radius: $curve-border;
 						transition: box-shadow 0.3s ease;
@@ -165,6 +165,15 @@
 
 						&.img-shrink {
 							width: 150px;
+						}
+					}
+					a {
+						overflow: initial;
+						&:hover {
+							text-shadow: none;
+							&::after {
+								display: none;
+							}
 						}
 					}
 				}
@@ -201,17 +210,15 @@
 			position: relative;
 			z-index: 2;
 			button {
-				background: $primary-orange;
+				background: $denim-black;
 				color: white;
 				border: none;
 				padding: 0.8rem 1.5rem;
 				border-radius: 5px;
 				cursor: pointer;
-				font-weight: bold;
+				font-family: $font-bold;
 				transition: background 0.3s ease;
 				font-size: 1.3rem;
-				@include container-outline($denim-black, $white);
-
 				&:hover {
 					background: darken($primary-orange, 10%);
 				}

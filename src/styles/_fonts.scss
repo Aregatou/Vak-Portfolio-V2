@@ -1,0 +1,35 @@
+/* Regular weight */
+@font-face {
+	font-family: 'Quicksand';
+	src: url('$styles/fonts/Quicksand-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Bold weight */
+@font-face {
+	font-family: 'Quicksand-bold';
+	src: url('$styles/fonts/Quicksand-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Light weight */
+@font-face {
+	font-family: 'Quicksand-light';
+	src: url('$styles/fonts/Quicksand-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Medium weight */
+@font-face {
+	font-family: 'Quicksand-med';
+	src: url('$styles/fonts/Quicksand-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}

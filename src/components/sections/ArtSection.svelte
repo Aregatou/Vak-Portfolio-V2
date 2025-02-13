@@ -9,12 +9,4 @@
 </section>
 
 <style lang="scss">
-	section {
-		.section-header {
-			@include section-header-styles();
-		}
-		.section-content {
-			@include section-content-styles();
-		}
-	}
 </style>

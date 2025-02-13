@@ -4,17 +4,14 @@ import preprocess from 'svelte-preprocess';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter(),
+		adapter: adapter()
 	},
 	preprocess: preprocess({
 		scss: {
 			prependData: `@import './src/styles/_variables.scss';`,
-			includePaths: [
-				'src/styles',
-			],
+			includePaths: ['src/styles']
 		}
-	}),
+	})
 };
 
 export default config;
-

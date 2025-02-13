@@ -73,7 +73,7 @@
 
 	.skill {
 		margin-bottom: 10px;
-		padding: $pad-sides-2;
+		padding: 0 24px;
 		@include flex-start;
 		align-items: end;
 
@@ -97,7 +97,7 @@
 
 			.skill-label {
 				@include flex-start;
-				font-weight: bold;
+				font-family: $font-med;
 				margin-bottom: 5px;
 				padding: 0.5rem 0;
 			}

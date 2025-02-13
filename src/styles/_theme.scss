@@ -1,0 +1,116 @@
+@function glow($color, $subtle) {
+	@if ($subtle) {
+		@return 0 0 5px rgba($color, 0.5), 0 0 10px rgba($color, 0.6), 0 0 15px rgba($color, 0.5);
+	} @else {
+		@return 0 0 5px rgba($color, 0.5), 0 0 10px rgba($color, 1), 0 0 15px rgba($color, 0.5);
+	}
+}
+
+@function combined-shadow($color) {
+	@return join($double-box-shadow, glow($color, false), comma);
+}
+
+:root {
+	--highlight-bg: #{$primary-red-dark};
+	--highlight-text: #{$white};
+	--header-span-highlight: #{$primary-yellow};
+	--section-header-bg: #{$primary-red};
+	--outline-box-shadow: #{$double-box-shadow};
+	--container-bg: #{$white};
+	--nav-background: url('/images/denim.png');
+	--body-background: url('/images/fabric.png');
+	--carousel-overlay: rgba(224, 67, 67, 0.5);
+	--nav-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	--synth-text: #{glow($white, true)};
+	--section-black: #{$denim-black};
+}
+
+.synth-mode {
+	--highlight-bg: #{$amethyst};
+	--header-span-highlight: #{$primary-orange};
+	--section-header-bg: #{$cosmic-purple};
+	--outline-box-shadow: #{combined-shadow($primary-orange)};
+	--container-bg: #{$dark-grey};
+	--nav-background: #{$dark-purple};
+	--body-background: #{$space-purple};
+	--carousel-overlay: #{rgba(#861782, 0.6)};
+	--nav-text-shadow: #{glow($amethyst, false)};
+	--section-black: #{rgba($dark-grey, 0.7)};
+
+	.section-header {
+		h4 {
+			text-shadow: #{glow($off-white, true)};
+
+			span {
+				text-shadow: #{glow($primary-orange, true)};
+			}
+		}
+	}
+	.section-content {
+		text-shadow: #{glow($amethyst, true)};
+		color: white;
+
+		.cards-container {
+			background: #{rgba($space-purple, 0.9)};
+			.card-image-circle {
+				box-shadow: #{glow($primary-orange, false)};
+			}
+		}
+		a {
+			text-shadow: #{glow($primary-red, true)};
+		}
+	}
+	#about-me .section-content.outlined {
+		background: #{rgba($dark-grey, 0.9)};
+	}
+	.noise {
+		opacity: 0.07;
+		background-image: url('/images/static.gif');
+		position: fixed;
+		top: 0%;
+		bottom: 0%;
+		left: 0%;
+		right: 0%;
+	}
+
+	.scrolling-grid {
+		position: fixed;
+		top: 100vh;
+		left: -50%;
+		width: 200%;
+		height: 100vh;
+		background: url('/images/pink-grid.png') repeat;
+		transform: perspective(600px) rotateX(-60deg) scaleY(-1);
+		transform-origin: top center;
+		will-change: background-position;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.pic-container {
+		img {
+			box-shadow: #{glow($primary-orange, false)};
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 98%;
+			border-radius: 50%;
+			pointer-events: none;
+
+			background: repeating-linear-gradient(
+				to bottom,
+				transparent,
+				transparent 2px,
+				rgba($primary-orange, 0.35) 2px,
+				rgba(#241b30, 0.75) 5px
+			);
+
+			animation: synth-scan 10s linear infinite;
+			z-index: 2;
+		}
+	}
+}
