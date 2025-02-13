@@ -61,8 +61,8 @@
 	.card {
 		text-decoration: none;
 		color: inherit;
-		overflow: hidden;
 		display: flex;
+
 		--card-svg-color: var(--svg-color);
 		flex-direction: row;
 		align-items: flex-start;
@@ -141,48 +141,55 @@
 						transition: transform 0.3s ease, fill 0.3s ease;
 						transform-origin: center;
 					}
-					@include respond-to(desktop) {
-						width: 70px;
-						height: 70px;
-					}
 				}
 			}
+
 			.card-content {
-				padding: $pad-1;
-				margin: auto;
+				/* padding: $pad-1; */
 				.card-title {
-					margin-top: 0;
+					margin: 0;
 					text-align: left;
 					font-size: 1.2rem;
 				}
 				.card-description {
-					text-align: left;
-				}
-				@include respond-to(desktop) {
-					.card-title {
-						text-align: center;
-						margin-bottom: 1em;
-						min-height: 2em;
-						height: 2.5em;
-						font-size: 1.4rem;
-					}
-					.card-description {
-						text-align: center;
-					}
+					/* margin-bottom: 0; */
 				}
 			}
+
 			@include respond-to(desktop) {
 				flex-direction: column;
-				align-items: center;
+				align-items: stretch;
+				flex: 1;
+
 				.card-image {
 					margin-right: $pad-1;
 					padding: $pad-1 0 $pad-1 0;
 					justify-content: flex-start;
+					margin: 0 auto;
+
+					.card-image-circle {
+						width: 70px;
+						height: 70px;
+					}
 				}
+
 				.card-content {
 					flex: 1;
-					text-align: left;
-					padding: $pad-1;
+					display: flex;
+					flex-direction: column;
+					/* padding: $pad-1; */
+
+					.card-title {
+						text-align: center;
+						min-height: 60px;
+						font-size: 1.25rem;
+						margin-top: 0;
+					}
+
+					.card-description {
+						/* margin: initial; */
+						text-align: center;
+					}
 				}
 			}
 		}

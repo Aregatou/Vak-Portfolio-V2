@@ -64,8 +64,6 @@
 {/if}
 
 <style lang="scss">
-	@import '$styles/global.css';
-
 	#sections {
 		position: relative;
 		width: 100%;
@@ -73,7 +71,7 @@
 		z-index: 2;
 		:global(section) {
 			margin-bottom: 2rem;
-			padding:0 1rem;
+			padding: 0 1rem;
 		}
 	}
 </style>

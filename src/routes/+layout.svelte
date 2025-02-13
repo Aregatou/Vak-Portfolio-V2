@@ -2,17 +2,19 @@
 	import Navbar from '$components/navbar.svelte';
 	import HamburgerToggle from '$components/ui/hamburgerToggle.svelte';
 	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+
+	const synthMode = writable(false);
 
 	let lineWidth = '100%';
 	let navOpen = false;
+	let synthAudio;
 
 	const updateLineWidth = () => {
 		const scrollPercentage =
 			(window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
 		lineWidth = `${100 - scrollPercentage}%`;
 	};
-
-	// const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
 
 	const toggleNav = () => {
 		navOpen = !navOpen;
@@ -25,6 +27,32 @@
 		}
 	};
 
+	let animationFrameId = null;
+	let offset = 0;
+	const speed = 0.3;
+	const maxOffset = 332;
+	let gridEl;
+
+	function animateGrid() {
+		offset += speed;
+		if (gridEl) {
+			gridEl.style.backgroundPosition = `0 -${offset % maxOffset}px`;
+		}
+		animationFrameId = requestAnimationFrame(animateGrid);
+	}
+
+	function startAnimation() {
+		if (!animationFrameId && gridEl) {
+			animateGrid();
+		}
+	}
+
+	function stopAnimation() {
+		if (animationFrameId) {
+			cancelAnimationFrame(animationFrameId);
+			animationFrameId = null;
+		}
+	}
 	onMount(() => {
 		window.addEventListener('scroll', updateLineWidth);
 		const handleResize = () => {
@@ -54,21 +82,38 @@
 		};
 
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
+
+		gridEl = document.querySelector('.scrolling-grid');
+
+		const unsubscribe = synthMode.subscribe((value) => {
+			if (value) {
+				startAnimation();
+				synthAudio?.play().catch((err) => console.warn('Auto-play blocked', err));
+			} else {
+				stopAnimation();
+				synthAudio?.pause();
+				// synthAudio.currentTime = 0;
+			}
+		});
+
 		return () => {
 			window.removeEventListener('scroll', updateLineWidth);
 			window.removeEventListener('resize', handleResize);
 			document.removeEventListener('click', handleClick, { capture: true });
 			document.body.style.overflow = '';
+			unsubscribe();
 		};
 	});
 </script>
 
+<audio bind:this={synthAudio} src="/audio/80s-retro-synth-wave.mp3" preload="auto" loop />
 <div class="colored-line" style="width: {lineWidth};" />
-
+<div class="noise" />
+<div class="scrolling-grid" />
 <HamburgerToggle {navOpen} {toggleNav} />
 
 <nav class:open={navOpen}>
-	<Navbar />
+	<Navbar {synthMode} />
 </nav>
 
 {#if navOpen}
@@ -87,7 +132,9 @@
 
 <footer />
 
-<style lang="scss">
+<style global lang="scss">
+	@import 'global.scss';
+
 	.colored-line {
 		height: 4px;
 		background-color: $primary-orange;
@@ -100,7 +147,7 @@
 
 	nav {
 		width: 300px;
-		background-image: var(--background-nav);
+		background: var(--nav-background);
 		background-repeat: repeat;
 		padding: 10px;
 		color: $primary-red;
@@ -109,7 +156,7 @@
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 		position: static;
 		flex-shrink: 0;
-		z-index: 2;
+		z-index: 10;
 	}
 
 	main {
@@ -117,7 +164,6 @@
 		flex-grow: 1;
 		position: relative;
 		transition: background 0.3s ease-in-out;
-		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		z-index: 3;

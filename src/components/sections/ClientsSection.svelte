@@ -18,14 +18,10 @@
 </section>
 
 <style lang="scss">
-	section#clients {
+	#clients {
 		margin-bottom: 0;
 		padding-left: 0;
-		.section-header {
-			@include section-header-styles();
-		}
 		.section-content {
-			@include section-content-styles();
 			background: var(--container-bg);
 			border-radius: $radius-left;
 			padding: 3rem 2rem $pad-1 2rem;
@@ -53,7 +49,6 @@
 			}
 			a {
 				text-decoration: none;
-				color: $primary-black;
 				transition: text-shadow 0.2s ease;
 				position: relative;
 				span {

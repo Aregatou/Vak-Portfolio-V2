@@ -101,18 +101,14 @@
 {/if}
 
 <style lang="scss">
-	section {
-		.section-header {
-			@include section-header-styles();
-		}
+	#WhatICraft {
 		.section-content {
-			@include section-content-styles();
-
 			.cards-container {
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: center; // or space-evenly, if that works better with wrapping
 				gap: 1rem;
+				background: none;
 			}
 		}
 	}

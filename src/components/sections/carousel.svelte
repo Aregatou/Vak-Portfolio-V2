@@ -97,7 +97,7 @@
 		overflow: hidden;
 		min-height: 250px;
 		z-index: 1;
-		color: var(--text-on-dark-bg);
+		color: $white;
 
 		.color-overlay {
 			position: absolute;
@@ -105,7 +105,7 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background-color: rgba(224, 67, 67, 0.5);
+			background-color: var(--carousel-overlay);
 			mix-blend-mode: saturate;
 			filter: grayscale(70%);
 			z-index: 1;
@@ -127,6 +127,7 @@
 				object-position: 30%;
 			}
 		}
+
 		.splide-caption {
 			position: absolute;
 			top: 54%;
@@ -136,7 +137,7 @@
 			color: $white-transparent;
 			padding: 1em;
 			font-family: $font-bold;
-			text-shadow: $text-shadow;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 			font-size: 1.2rem;
 			z-index: 3;
 			pointer-events: none;

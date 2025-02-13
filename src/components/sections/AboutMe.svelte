@@ -24,21 +24,16 @@
 </section>
 
 <style lang="scss">
-	section {
+	#about-me {
 		margin: 0;
-		.section-header {
-			@include section-header-styles();
-		}
 		.section-content {
-			@include section-content-styles();
-			@include container-outline(var(--container-outline-bg), var(--container-outline-text));
-
-			color: var(--text-on-dark-bg);
+			background: var(--section-black);
+			color: $white;
 			padding: $pad-1 * 3;
 			font-size: 1.3rem;
 
 			a {
-				@include anchor-underline;
+				white-space: nowrap;
 			}
 		}
 	}

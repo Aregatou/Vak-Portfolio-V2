@@ -17,7 +17,7 @@
 			icon: SVGIcons.accessibility
 		},
 		{
-			title: 'DIY Infrastructure & Automation',
+			title: 'DIY Automation',
 			description:
 				'Years of building and fine-tuning custom systems—from Dockerized apps to a home server setup.',
 			icon: SVGIcons.diy
@@ -53,13 +53,8 @@
 </section>
 
 <style lang="scss">
-	section {
-		.section-header {
-			@include section-header-styles();
-		}
+	#WhatIDo {
 		.section-content {
-			@include section-content-styles();
-
 			.cards-container {
 				position: relative;
 				bottom: 40px;
@@ -68,14 +63,11 @@
 				flex-direction: column;
 				align-items: flex-start;
 				gap: 1rem;
-				margin: 0 auto;
 				padding: 3rem 1rem 1rem;
-				border-radius: $radius-left;
-				@include container-outline();
 
 				@include respond-to(desktop) {
 					flex-direction: row;
-					align-items: flex-start;
+					align-items: stretch;
 				}
 			}
 			.skills {
@@ -83,7 +75,7 @@
 				flex-wrap: wrap;
 				.column {
 					flex: 1;
-					min-width:350px;
+					min-width: 350px;
 				}
 			}
 		}
