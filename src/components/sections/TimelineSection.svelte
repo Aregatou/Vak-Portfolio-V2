@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { fadeIn, lazyLoadImage, timelineExperiences } from '$lib';
 	import { flip } from 'svelte/animate';
 	import { onMount } from 'svelte';
@@ -8,7 +8,7 @@
 	let showFullTimeline = false;
 	let timelineContainer;
 
-	function animateMaxHeight(from, to, cleanup = false) {
+	const animateMaxHeight = (from, to, cleanup = false) => {
 		timelineContainer.style.maxHeight = from + 'px';
 		requestAnimationFrame(() => {
 			timelineContainer.style.maxHeight = to + 'px';
@@ -21,9 +21,9 @@
 				}
 			});
 		}
-	}
+	};
 
-	function toggleTimeline() {
+	const toggleTimeline = () => {
 		if (!timelineContainer) return;
 
 		if (!showFullTimeline) {
@@ -34,7 +34,7 @@
 			animateMaxHeight(currentHeight, collapsedHeight);
 		}
 		showFullTimeline = !showFullTimeline;
-	}
+	};
 
 	onMount(() => {
 		if (timelineContainer && !showFullTimeline) {
@@ -61,7 +61,7 @@
 						<div class="timeline-content right">
 							<a href={item.link} target="_blank">
 								<div class="image-container {item.small}">
-									<img src={item.img} alt={item.alt} use:lazyLoadImage loading="lazy" />
+									<img src={item.img} alt={item.alt} use:lazyLoadImage />
 								</div>
 							</a>
 						</div>
@@ -78,6 +78,7 @@
 </section>
 
 <style lang="scss">
+	@use 'sass:color';
 	#timeline {
 		.section-content {
 			position: relative;
@@ -220,7 +221,7 @@
 				transition: background 0.3s ease;
 				font-size: 1.3rem;
 				&:hover {
-					background: darken($primary-orange, 10%);
+					background: color.adjust($primary-orange, $lightness: -10%);
 				}
 				&.expanded {
 				}

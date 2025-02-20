@@ -1,5 +1,7 @@
-@import 'theme';
-@import 'fonts';
+@use 'theme' as *;
+@use 'fonts' as *;
+@use 'variables' as *;
+
 
 html,
 body {

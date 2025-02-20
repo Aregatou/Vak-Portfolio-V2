@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Card from '$components/ui/Card.svelte';
 	import { fadeIn, SVGIcons } from '$lib';
 	import artProjects from '$data/artProjects.json';
@@ -58,20 +58,20 @@
 		}
 	];
 
-	function openProject(project) {
+	const openProject = (project) => {
 		console.log('openProject triggered:', project);
 		activeProject = project;
 		showModal = true;
 		document.body.classList.add('no-scroll');
 		document.documentElement.classList.add('no-scroll');
-	}
+	};
 
-	function closeModal() {
+	const closeModal = () => {
 		showModal = false;
 		activeProject = null;
 		document.body.classList.remove('no-scroll');
 		document.documentElement.classList.remove('no-scroll');
-	}
+	};
 </script>
 
 <section id="WhatICraft" class="fade-in-section" use:fadeIn>

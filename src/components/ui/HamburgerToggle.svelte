@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let navOpen = false;
 	export let toggleNav = () => {};
 </script>

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Card from '$components/ui/Card.svelte';
 	import ProgressBar from '$components/ui/ProgressBar.svelte';
 	import { fadeIn, SVGIcons, frontEndSkills, otherSkills } from '$lib';

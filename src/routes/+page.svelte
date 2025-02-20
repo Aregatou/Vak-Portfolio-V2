@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Carousel from '$components/sections/Carousel.svelte';
 	import { onMount } from 'svelte';
 	import { loadingMessages } from '$lib';
@@ -7,7 +7,7 @@
 	let randomLoadingMessage = '';
 	let loading = true;
 
-	function pickRandomMessage() {
+	const pickRandomMessage = () => {
 		let lastIndex = parseInt(localStorage.getItem('lastLoadingMessageIndex'), 10);
 		if (isNaN(lastIndex)) lastIndex = -1;
 		let newIndex;
@@ -22,8 +22,9 @@
 
 		localStorage.setItem('lastLoadingMessageIndex', newIndex);
 		return loadingMessages[newIndex];
-	}
-	async function loadSections() {
+	};
+
+	const loadSections = async () => {
 		const modules = await Promise.all([
 			import('$components/sections/AboutMe.svelte'),
 			import('$components/sections/WhatIDo.svelte'),
@@ -45,7 +46,7 @@
 		setTimeout(() => {
 			loading = false;
 		}, 1200);
-	}
+	};
 
 	onMount(() => {
 		randomLoadingMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];

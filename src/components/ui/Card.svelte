@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -12,7 +12,7 @@
 
 	let svgContent = '';
 
-	async function loadSVG() {
+	const loadSVG = async () => {
 		try {
 			const response = await fetch(svgMarkup);
 			if (!response.ok) throw new Error(`Failed to load SVG: ${svgMarkup}`);
@@ -21,7 +21,7 @@
 		} catch (error) {
 			console.error(error);
 		}
-	}
+	};
 
 	onMount(() => {
 		if (mode === 'icon' && svgMarkup) {
@@ -29,10 +29,10 @@
 		}
 	});
 
-	function handleClick(event) {
+	const handleClick = (event) => {
 		console.log('Card clicked:', title);
 		dispatch('cardclick', event);
-	}
+	};
 </script>
 
 <div

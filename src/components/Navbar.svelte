@@ -1,32 +1,23 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import ToggleSlider from '$components/ui/ToggleSlider.svelte';
+	import { SVGIcons } from '$lib';
+
 	export let synthMode;
+	export let toggleSynthAudio;
+	export let isSynthPlaying;
 
-	// onMount(() => {
-	// 	const storedSynth = localStorage.getItem('synthMode') === 'enabled';
-	// 	synthMode.set(storedSynth);
-	// 	updateDocumentClass(storedSynth);
-	// 	console.log($synthMode);
-	// });
-
-	function updateDocumentClass(enabled) {
-		if (enabled) {
-			document.documentElement.classList.add('synth-mode');
-			// localStorage.setItem('synthMode', 'enabled');
-		} else {
-			document.documentElement.classList.remove('synth-mode');
-			// localStorage.setItem('synthMode', 'disabled');
-		}
-	}
-
-	function toggleSynthMode(newOption) {
+	const toggleSynthMode = () => {
 		synthMode.update((value) => {
 			const newValue = !value;
-			updateDocumentClass(newValue);
+			if (newValue) {
+				document.documentElement.classList.add('synth-mode');
+			} else {
+				document.documentElement.classList.remove('synth-mode');
+			}
 			return newValue;
 		});
-	}
+	};
 </script>
 
 <div id="nav-container">
@@ -36,10 +27,7 @@
 
 	<h2>Vak Kobiashvili</h2>
 	<h4>Developer</h4>
-	<div class="mode-container">
-		<p>synth-mode</p>
-		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} />
-	</div>
+
 	<ul>
 		<li><a href="#home">Home</a></li>
 		<li><a href="#about-me">About Me</a></li>
@@ -53,6 +41,17 @@
 			<!-- <a href="https://github.com/Aregatou/Vak-Portfolio-V2" target="_blank">This site's code</a> -->
 		</li>
 	</ul>
+	<div class="mode-container">
+		<p>synth-mode</p>
+		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} />
+
+		<button on:click={toggleSynthAudio} style="visibility: {$synthMode ? 'visible' : 'hidden'};">
+			<img
+				src={isSynthPlaying ? SVGIcons.pause : SVGIcons.play}
+				alt={isSynthPlaying ? 'Pause Music' : 'Play Music'}
+			/>
+		</button>
+	</div>
 </div>
 
 <style lang="scss">
@@ -68,11 +67,28 @@
 			color: $white;
 			font-style: italic;
 			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			padding-left: 20px;
 			p {
 				text-shadow: var(--synth-text);
 				margin-right: 5px;
 				font-size: 0.9rem;
 				display: inline;
+			}
+			button {
+				background: none;
+				padding: 0;
+				border: none;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: 10px;
+				img {
+					width: 20px;
+					height: 20px;
+				}
 			}
 		}
 		.pic-container {

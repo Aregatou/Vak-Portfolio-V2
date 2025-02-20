@@ -20,7 +20,9 @@ export type SVGIconKey =
 	| 'jira'
 	| 'slack'
 	| 'scrum'
-	| 'diy';
+	| 'diy'
+	| 'play'
+	| 'pause';
 
 export const SVGIcons: Record<SVGIconKey, string> = {
 	responsive: '/icons/responsive.svg',
@@ -44,5 +46,7 @@ export const SVGIcons: Record<SVGIconKey, string> = {
 	jira: '/icons/jira.svg',
 	slack: '/icons/slack.svg',
 	scrum: '/icons/scrum.svg',
-	diy: '/icons/diy.svg'
+	diy: '/icons/diy.svg',
+	play: '/icons/play.svg',
+	pause: '/icons/pause.svg'
 };

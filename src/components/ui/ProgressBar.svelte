@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { observeVisibility } from '$lib';
 
@@ -10,7 +10,7 @@
 	let visible = false;
 	let svgContent = '';
 
-	async function loadSVG() {
+	const loadSVG = async () => {
 		try {
 			const response = await fetch(svgMarkup);
 			if (!response.ok) throw new Error(`Failed to load SVG: ${svgMarkup}`);
@@ -18,13 +18,13 @@
 		} catch (error) {
 			console.error(error);
 		}
-	}
+	};
 
 	loadSVG();
 
-	function setVisible() {
+	const setVisible = () => {
 		visible = true;
-	}
+	};
 </script>
 
 <div class="skill" use:observeVisibility={setVisible}>
