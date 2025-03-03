@@ -39,6 +39,7 @@
 	class="card {mode === 'gallery' ? 'gallery-mode' : 'card-mode'}"
 	style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}
 	on:click={handleClick}
+	
 >
 	<div class="card-image">
 		{#if mode === 'gallery' && image}
@@ -71,7 +72,9 @@
 			max-width: 250px;
 			flex-direction: column;
 			align-items: center;
-			background: $amethyst;
+			background: var(--svg-color);
+			// background: $amethyst;
+			color: $white;
 			border-radius: $curve-border;
 			cursor: pointer;
 			transition: box-shadow 0.3s ease;

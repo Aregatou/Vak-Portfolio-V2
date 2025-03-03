@@ -58,6 +58,13 @@
 		}
 	];
 
+	const galleryColors =[
+		`var(--gallery-color-1)`,
+		`var(--gallery-color-2)`,
+		`var(--gallery-color-3)`,
+		`var(--gallery-color-4)`,
+	]
+
 	function openProject(project) {
 		console.log('openProject triggered:', project);
 		activeProject = project;
@@ -80,13 +87,14 @@
 	</div>
 	<div class="section-content cards-container">
 		<div class="cards-container">
-			{#each projects as project}
+			{#each projects as project, index}
 				<Card
 					title={project.title}
 					description=""
 					mode="gallery"
 					image={project.heroImage}
 					svgMarkup={SVGIcons.woodworking}
+					color={galleryColors[index % galleryColors.length]}
 					on:cardclick={() => openProject(project)}
 				/>
 			{/each}
@@ -94,8 +102,8 @@
 	</div>
 </section>
 {#if showModal && activeProject}
-	<Modal on:close={closeModal}>
-		<h3>{activeProject.title}</h3>
+	<Modal on:close={closeModal} title={activeProject.title}>
+		<!-- <h3>{activeProject.title} test</h3> -->
 		<WoodworkingGallery images={activeProject.images} />
 	</Modal>
 {/if}

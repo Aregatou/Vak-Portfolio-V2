@@ -23,6 +23,12 @@
 	--nav-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 	--synth-text: #{glow($white, true)};
 	--section-black: #{$denim-black};
+	--gallery-color-1:#{$amethyst};
+	--gallery-color-2:#{$space-purple};
+	--gallery-color-3:#{$cosmic-purple};
+	--gallery-color-4:#{$dark-purple};
+	--modal-header: #{$white};
+	--modal-body: #{$off-white};
 }
 
 .synth-mode {
@@ -36,6 +42,9 @@
 	--carousel-overlay: #{rgba(#861782, 0.6)};
 	--nav-text-shadow: #{glow($amethyst, false)};
 	--section-black: #{rgba($dark-grey, 0.7)};
+	--modal-header: #{$cosmic-purple};
+	--modal-body: #{$space-purple};
+
 
 	.section-header {
 		h4 {
@@ -59,9 +68,15 @@
 		a {
 			text-shadow: #{glow($primary-red, true)};
 		}
+
 	}
 	#about-me .section-content.outlined {
 		background: #{rgba($dark-grey, 0.9)};
+	}
+	.modal-header {
+		h2, button {
+			color: white;
+		}
 	}
 	.noise {
 		opacity: 0.07;
