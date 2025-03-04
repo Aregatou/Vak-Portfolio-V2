@@ -26,6 +26,8 @@
 <style lang="scss">
 	#about-me {
 		margin: 0;
+		z-index: 2;
+		position: relative;
 		.section-content {
 			background: var(--section-black);
 			color: $white;

@@ -68,7 +68,7 @@
 		position: relative;
 		width: 100%;
 		top: -100px;
-		z-index: 2;
+		/* z-index: 2; */
 		:global(section) {
 			margin-bottom: 2rem;
 			padding: 0 1rem;

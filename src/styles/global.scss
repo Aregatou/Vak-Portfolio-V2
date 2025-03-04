@@ -154,3 +154,12 @@ html {
 		background-position: 0 200px;
 	}
 }
+
+@keyframes moveGrid {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 0 -165px;
+	}
+}

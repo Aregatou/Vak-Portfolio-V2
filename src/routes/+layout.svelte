@@ -27,32 +27,32 @@
 		}
 	};
 
-	let animationFrameId = null;
-	let offset = 0;
-	const speed = 0.3;
-	const maxOffset = 332;
-	let gridEl;
+	// let animationFrameId = null;
+	// let offset = 0;
+	// const speed = 0.3;
+	// const maxOffset = 332;
+	// let gridEl;
 
-	function animateGrid() {
-		offset += speed;
-		if (gridEl) {
-			gridEl.style.backgroundPosition = `0 -${offset % maxOffset}px`;
-		}
-		animationFrameId = requestAnimationFrame(animateGrid);
-	}
+	// function animateGrid() {
+	// 	offset += speed;
+	// 	if (gridEl) {
+	// 		gridEl.style.backgroundPosition = `0 -${offset % maxOffset}px`;
+	// 	}
+	// 	animationFrameId = requestAnimationFrame(animateGrid);
+	// }
 
-	function startAnimation() {
-		if (!animationFrameId && gridEl) {
-			animateGrid();
-		}
-	}
+	// function startAnimation() {
+	// 	if (!animationFrameId && gridEl) {
+	// 		animateGrid();
+	// 	}
+	// }
 
-	function stopAnimation() {
-		if (animationFrameId) {
-			cancelAnimationFrame(animationFrameId);
-			animationFrameId = null;
-		}
-	}
+	// function stopAnimation() {
+	// 	if (animationFrameId) {
+	// 		cancelAnimationFrame(animationFrameId);
+	// 		animationFrameId = null;
+	// 	}
+	// }
 	onMount(() => {
 		window.addEventListener('scroll', updateLineWidth);
 		const handleResize = () => {
@@ -83,14 +83,14 @@
 
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
 
-		gridEl = document.querySelector('.scrolling-grid');
+		// gridEl = document.querySelector('.scrolling-grid');
 
 		const unsubscribe = synthMode.subscribe((value) => {
 			if (value) {
-				startAnimation();
+				// startAnimation();
 				synthAudio?.play().catch((err) => console.warn('Auto-play blocked', err));
 			} else {
-				stopAnimation();
+				// stopAnimation();
 				synthAudio?.pause();
 				// synthAudio.currentTime = 0;
 			}
@@ -101,7 +101,7 @@
 			window.removeEventListener('resize', handleResize);
 			document.removeEventListener('click', handleClick, { capture: true });
 			document.body.style.overflow = '';
-			unsubscribe();
+			// unsubscribe();
 		};
 	});
 </script>
@@ -166,7 +166,7 @@
 		transition: background 0.3s ease-in-out;
 		display: flex;
 		flex-direction: column;
-		z-index: 3;
+		/* z-index: 3; */
 		align-items: stretch;
 	}
 
