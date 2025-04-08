@@ -39,7 +39,9 @@
 	class="card {mode === 'gallery' ? 'gallery-mode' : 'card-mode'}"
 	style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}
 	on:click={handleClick}
-	
+	role="button"
+	tabindex="0"
+	on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleClick(e)}
 >
 	<div class="card-image">
 		{#if mode === 'gallery' && image}

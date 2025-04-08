@@ -19,10 +19,20 @@
 	onDestroy(() => window.removeEventListener('keydown', handleKeydown));
 </script>
 
-<div class="modal-overlay" on:click={close} transition:fade>
-	<div class="modal-content" on:click|stopPropagation transition:fade>
+<div class="modal-overlay-wrapper" transition:fade>
+	<button type="button" class="modal-overlay" aria-label="Close modal overlay" on:click={close}
+		>&nbsp;</button
+	>
+
+	<div
+		class="modal-content"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="modalTitle"
+		transition:fade
+	>
 		<div class="modal-header">
-			<h2 class="card-title">{title}</h2>
+			<h2 id="modalTitle" class="card-title">{title}</h2>
 			<button class="modal-close" on:click={close} aria-label="Close modal">&times;</button>
 		</div>
 		<slot />
@@ -30,7 +40,7 @@
 </div>
 
 <style lang="scss">
-	.modal-overlay {
+	.modal-overlay-wrapper {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -41,12 +51,23 @@
 		align-items: center;
 		justify-content: center;
 		z-index: 1000;
+		.modal-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			border: none;
+			cursor: pointer;
+		}
 	}
+
 	.modal-content {
-		background: var(--modal-body);
-		// padding: 1rem;
-		border-radius: 5px;
 		position: relative;
+		margin: auto;
+		background: var(--modal-body);
+		border-radius: 5px;
 		max-width: 90%;
 		width: 100%;
 		max-height: 90%;
