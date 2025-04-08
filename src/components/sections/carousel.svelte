@@ -202,17 +202,7 @@
 		bottom: 80px;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.carousel-container {
-			animation: none;
-		}
-	}
-
 	@media screen and (max-height: 600px) {
-		.carousel-container .carousel-text {
-			top: 40px;
-		}
-
 		:global(.splide__pagination) {
 			display: none;
 		}
