@@ -3,59 +3,17 @@
 	import { fadeIn, SVGIcons } from '$lib';
 	import artProjects from '$data/artProjects.json';
 	import Modal from '$components/ui/Modal.svelte';
-	import WoodworkingGallery from '$components/ui/WoodworkingGallery.svelte';
+	import ProjectGallery from '$components/ui/ProjectGallery.svelte';
+	import { projects } from '$data/projects';
 
 	let showModal = false;
 	let activeProject = null;
 
-	let projects = [
-		{
-			title: 'Goku',
-			heroImage: artProjects['goku-v1'][6].src,
-			images: artProjects['goku-v1']
-		},
-		{
-			title: 'Wood Panel Art',
-			heroImage: artProjects['wood-panel'][0].src,
-			images: artProjects['wood-panel']
-		},
-
-		{
-			title: 'Quincy',
-			heroImage: artProjects['quincy'][9].src,
-			images: artProjects['quincy']
-		},
-		{
-			title: 'Paint Drip Blue Jay',
-			heroImage: artProjects['blue-jay'][5].src,
-			images: artProjects['blue-jay']
-		},
-		{
-			title: 'Lumpy Space Princess',
-			heroImage: artProjects['LSP'][10].src,
-			images: artProjects['LSP']
-		},
-		{
-			title: 'Woodburned Elephant',
-			heroImage: artProjects['elephant'][6].src,
-			images: artProjects['elephant']
-		},
-
-		{
-			title: 'Mother & Son',
-			heroImage: artProjects['holding-son'][6].src,
-			images: artProjects['holding-son']
-		},
-		{
-			title: 'Custom Ottoman',
-			heroImage: artProjects['ottoman'][8].src,
-			images: artProjects['ottoman']
-		},
-		{
-			title: 'Sword Mount',
-			heroImage: artProjects['sword-mount'][2].src,
-			images: artProjects['sword-mount']
-		}
+	const galleryColors = [
+		`var(--gallery-color-1)`,
+		`var(--gallery-color-2)`,
+		`var(--gallery-color-3)`,
+		`var(--gallery-color-4)`
 	];
 
 	const openProject = (project) => {
@@ -80,13 +38,14 @@
 	</div>
 	<div class="section-content cards-container">
 		<div class="cards-container">
-			{#each projects as project}
+			{#each projects as project, index}
 				<Card
 					title={project.title}
-					description=""
+					description={project.description}
 					mode="gallery"
 					image={project.heroImage}
 					svgMarkup={SVGIcons.woodworking}
+					color={galleryColors[index % galleryColors.length]}
 					on:cardclick={() => openProject(project)}
 				/>
 			{/each}
@@ -94,9 +53,8 @@
 	</div>
 </section>
 {#if showModal && activeProject}
-	<Modal on:close={closeModal}>
-		<h3>{activeProject.title}</h3>
-		<WoodworkingGallery images={activeProject.images} />
+	<Modal on:close={closeModal} title={activeProject.title}>
+		<ProjectGallery images={activeProject.images} />
 	</Modal>
 {/if}
 

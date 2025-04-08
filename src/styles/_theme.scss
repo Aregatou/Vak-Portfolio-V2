@@ -26,8 +26,12 @@
 	--nav-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 	--synth-text: #{glow($white, true)};
 	--section-black: #{$denim-black};
-	--modal-bg: #{$off-white};
-	--modal-text: #{$denim-black};
+	--gallery-color-1: #{$amethyst};
+	--gallery-color-2: #{$space-purple};
+	--gallery-color-3: #{$cosmic-purple};
+	--gallery-color-4: #{$dark-purple};
+	--modal-header: #{$white};
+	--modal-body: #{$off-white};
 }
 
 .synth-mode {
@@ -41,8 +45,8 @@
 	--carousel-overlay: #{rgba(#861782, 0.6)};
 	--nav-text-shadow: #{glow($amethyst, false)};
 	--section-black: #{rgba($dark-grey, 0.7)};
-	--modal-bg: #{$dark-purple};
-	--modal-text: #{$off-white};
+	--modal-header: #{$cosmic-purple};
+	--modal-body: #{$space-purple};
 
 	.section-header {
 		h4 {
@@ -70,6 +74,12 @@
 	#about-me .section-content.outlined {
 		background: #{rgba($dark-grey, 0.9)};
 	}
+	.modal-header {
+		h2,
+		button {
+			color: white;
+		}
+	}
 	.noise {
 		opacity: 0.07;
 		background-image: url('/images/static.gif');
@@ -79,7 +89,6 @@
 		left: 0%;
 		right: 0%;
 	}
-
 	.scrolling-grid {
 		position: fixed;
 		top: 100vh;
@@ -93,7 +102,6 @@
 		pointer-events: none;
 		z-index: 0;
 	}
-
 	.pic-container {
 		img {
 			box-shadow: #{glow($primary-orange, false)};
@@ -120,4 +128,53 @@
 			z-index: 2;
 		}
 	}
+	// .scrolling-grid {
+	// 	position: fixed;
+	// 	top: 0;
+	// 	left: -50%;
+	// 	width: 200%;
+	// 	height: 100vh;
+	// 	overflow: hidden;
+	// 	pointer-events: none;
+	// 	z-index: 0;
+	// }
+
+	// .scrolling-grid::before {
+	// 	content: '';
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	background: url('/images/pink-grid3.png') repeat;
+	// 	will-change: transform;
+	// 	animation: moveGrid 5s linear infinite;
+	// }
+
+	// .pic-container {
+	// 	img {
+	// 		box-shadow: #{glow($primary-orange, false)};
+	// 	}
+	// 	&::before {
+	// 		content: '';
+	// 		position: absolute;
+	// 		top: 0;
+	// 		left: 0;
+	// 		width: 100%;
+	// 		height: 98%;
+	// 		border-radius: 50%;
+	// 		pointer-events: none;
+
+	// 		background: repeating-linear-gradient(
+	// 			to bottom,
+	// 			transparent,
+	// 			transparent 2px,
+	// 			rgba($primary-orange, 0.35) 2px,
+	// 			rgba(#241b30, 0.75) 5px
+	// 		);
+
+	// 		animation: synth-scan 10s linear infinite;
+	// 		z-index: 2;
+	// 	}
+	// }
 }
