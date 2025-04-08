@@ -29,8 +29,7 @@
 			import('$components/sections/WhatIDo.svelte'),
 			import('$components/sections/ClientsSection.svelte'),
 			import('$components/sections/TimelineSection.svelte'),
-			import('$components/sections/WhatICraft.svelte'),
-			import('$components/sections/ArtSection.svelte')
+			import('$components/sections/ProjectsSection.svelte')
 		]);
 
 		sections = {
@@ -38,8 +37,7 @@
 			WhatIDo: modules[1].default,
 			ClientsSection: modules[2].default,
 			TimelineSection: modules[3].default,
-			WhatICraft: modules[4].default
-			// ArtSection: modules[5].default
+			ProjectsSection: modules[4].default
 		};
 
 		setTimeout(() => {

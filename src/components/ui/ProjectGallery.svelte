@@ -26,7 +26,7 @@
 		autoplay: false,
 		pagination: false,
 		arrows: true,
-		direction:'ttb',
+		direction: 'ttb',
 		height: 500
 	};
 
@@ -93,7 +93,6 @@
 	</div>
 </section>
 
-
 <style lang="scss">
 	#modal-container.gallery-container {
 		max-width: 800px;
@@ -148,5 +147,4 @@
 		white-space: nowrap;
 		border: 0;
 	}
-
 </style>

@@ -36,10 +36,7 @@
 
 	<h2>Vak Kobiashvili</h2>
 	<h4>Developer</h4>
-	<div class="mode-container">
-		<p>synth-mode</p>
-		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} />
-	</div>
+
 	<ul>
 		<li><a href="#home">Home</a></li>
 		<li><a href="#about-me">About Me</a></li>
@@ -53,6 +50,10 @@
 			<!-- <a href="https://github.com/Aregatou/Vak-Portfolio-V2" target="_blank">This site's code</a> -->
 		</li>
 	</ul>
+	<div class="mode-container">
+		<p>synth-mode</p>
+		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} />
+	</div>
 </div>
 
 <style lang="scss">

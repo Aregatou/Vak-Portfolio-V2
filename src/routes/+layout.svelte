@@ -88,6 +88,7 @@
 		const unsubscribe = synthMode.subscribe((value) => {
 			if (value) {
 				// startAnimation();
+				synthAudio.volume = 0.2;
 				synthAudio?.play().catch((err) => console.warn('Auto-play blocked', err));
 			} else {
 				// stopAnimation();
