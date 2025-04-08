@@ -1,14 +1,15 @@
-<script>
-	import Navbar from '$components/navbar.svelte';
+<script lang="ts">
+	import Navbar from '$components/Navbar.svelte';
 	import HamburgerToggle from '$components/ui/hamburgerToggle.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	const synthMode = writable(false);
 
+	let synthAudio;
+	let isSynthPlaying = false;
 	let lineWidth = '100%';
 	let navOpen = false;
-	let synthAudio;
 
 	const updateLineWidth = () => {
 		const scrollPercentage =
@@ -27,60 +28,78 @@
 		}
 	};
 
+	const toggleSynthAudio = () => {
+		if (!synthAudio) return;
+		if (isSynthPlaying) {
+			synthAudio.pause();
+			isSynthPlaying = false;
+		} else {
+			synthAudio
+				.play()
+				.then(() => (isSynthPlaying = true))
+				.catch((err) => console.error('Audio playback error:', err));
+		}
+	};
+
 	let animationFrameId = null;
 	let offset = 0;
 	const speed = 0.3;
 	const maxOffset = 332;
 	let gridEl;
 
-	function animateGrid() {
+	const animateGrid = () => {
 		offset += speed;
 		if (gridEl) {
 			gridEl.style.backgroundPosition = `0 -${offset % maxOffset}px`;
 		}
 		animationFrameId = requestAnimationFrame(animateGrid);
-	}
+	};
 
-	function startAnimation() {
+	const startAnimation = () => {
 		if (!animationFrameId && gridEl) {
 			animateGrid();
 		}
-	}
+	};
 
-	function stopAnimation() {
+	const stopAnimation = () => {
 		if (animationFrameId) {
 			cancelAnimationFrame(animationFrameId);
 			animationFrameId = null;
 		}
-	}
+	};
+
+	const updateDocumentClass = (enabled) => {
+		if (enabled) {
+			document.documentElement.classList.add('synth-mode');
+		} else {
+			document.documentElement.classList.remove('synth-mode');
+		}
+	};
+
+	const handleResize = () => {
+		if (window.innerWidth >= 1024 && navOpen) {
+			navOpen = false;
+			document.body.classList.remove('no-scroll');
+			document.documentElement.classList.remove('no-scroll');
+		}
+	};
+
+	const handleClick = (e) => {
+		const anchor = e.target.closest('a[href^="#"]');
+		if (anchor) {
+			e.preventDefault();
+			const targetId = anchor.getAttribute('href');
+			const target = document.querySelector(targetId);
+			if (target) {
+				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				window.history.pushState(null, '', targetId);
+			}
+		}
+	};
+
 	onMount(() => {
 		window.addEventListener('scroll', updateLineWidth);
-		const handleResize = () => {
-			if (window.innerWidth >= 1024 && navOpen) {
-				navOpen = false;
-				document.body.style.overflow = '';
-				document.body.classList.remove('no-scroll');
-				document.documentElement.classList.remove('no-scroll');
-			}
-		};
-
-		handleResize();
-
 		window.addEventListener('resize', handleResize);
-
-		const handleClick = (e) => {
-			const anchor = e.target.closest('a[href^="#"]');
-			if (anchor) {
-				e.preventDefault();
-				const targetId = anchor.getAttribute('href');
-				const target = document.querySelector(targetId);
-				if (target) {
-					target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-					window.history.pushState(null, '', targetId);
-				}
-			}
-		};
-
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
 
 		gridEl = document.querySelector('.scrolling-grid');
@@ -88,11 +107,19 @@
 		const unsubscribe = synthMode.subscribe((value) => {
 			if (value) {
 				startAnimation();
-				synthAudio?.play().catch((err) => console.warn('Auto-play blocked', err));
+				if (synthAudio) {
+					synthAudio.volume = 0.07;
+					synthAudio
+						.play()
+						.then(() => (isSynthPlaying = true))
+						.catch((err) => console.warn('Auto-play blocked', err));
+				}
 			} else {
 				stopAnimation();
-				synthAudio?.pause();
-				// synthAudio.currentTime = 0;
+				if (synthAudio) {
+					synthAudio.pause();
+					isSynthPlaying = false;
+				}
 			}
 		});
 
@@ -100,7 +127,7 @@
 			window.removeEventListener('scroll', updateLineWidth);
 			window.removeEventListener('resize', handleResize);
 			document.removeEventListener('click', handleClick, { capture: true });
-			document.body.style.overflow = '';
+			document.body.classList.remove('no-scroll');
 			unsubscribe();
 		};
 	});
@@ -113,7 +140,7 @@
 <HamburgerToggle {navOpen} {toggleNav} />
 
 <nav class:open={navOpen}>
-	<Navbar {synthMode} />
+	<Navbar {synthMode} {toggleSynthAudio} {isSynthPlaying} />
 </nav>
 
 {#if navOpen}
@@ -133,7 +160,7 @@
 <footer />
 
 <style global lang="scss">
-	@import 'global.scss';
+	@use 'global.scss';
 
 	.colored-line {
 		height: 4px;
@@ -166,8 +193,9 @@
 		transition: background 0.3s ease-in-out;
 		display: flex;
 		flex-direction: column;
-		z-index: 3;
+		z-index: 10;
 		align-items: stretch;
+		overflow: auto;
 	}
 
 	@include respond-to(mobile) {

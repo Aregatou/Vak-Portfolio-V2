@@ -7,8 +7,11 @@ const config = {
 		adapter: adapter()
 	},
 	preprocess: preprocess({
+		typescript: {
+			tsconfigFile: './tsconfig.json'
+		},
 		scss: {
-			prependData: `@import './src/styles/_variables.scss';`,
+			prependData: `@use 'src/styles/variables' as *;`,
 			includePaths: ['src/styles']
 		}
 	})

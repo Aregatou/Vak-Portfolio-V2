@@ -1,4 +1,7 @@
-export function observeVisibility(node, setVisibility) {
+export function observeVisibility(
+	node: HTMLElement,
+	setVisibility: (visible: boolean) => void
+  ) {
 	const observer = new IntersectionObserver(
 		(entries) => {
 			for (const entry of entries) {

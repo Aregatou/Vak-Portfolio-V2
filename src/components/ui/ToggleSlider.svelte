@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
 	export let checked = false;
-
 	export let onChange = () => {};
 
-	function toggle() {
+	const toggle = () => {
 		onChange(!checked);
-	}
+	};
 </script>
 
 <label class="toggle">

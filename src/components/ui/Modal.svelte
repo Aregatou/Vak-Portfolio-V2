@@ -1,17 +1,17 @@
-<script>
+<script lang="ts">
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
 	const dispatch = createEventDispatcher();
 
-	function close() {
+	const close = () => {
 		dispatch('close');
-	}
+	};
 
-	function handleKeydown(event) {
+	const handleKeydown = (event) => {
 		if (event.key === 'Escape') {
 			close();
 		}
-	}
+	};
 
 	window.addEventListener('keydown', handleKeydown);
 	onDestroy(() => window.removeEventListener('keydown', handleKeydown));
@@ -38,7 +38,8 @@
 		z-index: 1000;
 	}
 	.modal-content {
-		background: $off-white;
+		background: var(--modal-bg);
+		color: var(--modal-text);
 		padding: 1rem;
 		border-radius: 5px;
 		position: relative;
@@ -46,6 +47,7 @@
 		width: 100%;
 		max-height: 90%;
 		overflow-y: auto;
+		overflow-x: hidden;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 		@include respond-to(desktop) {
 			max-width: 50%;

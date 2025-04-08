@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';
 	import { lazyLoadImage } from '$lib';
@@ -15,9 +15,9 @@
 		'I build things in real life too'
 	];
 
-	function updateCaption(event) {
+	const updateCaption = (event) => {
 		activeIndex = event.detail.index;
-	}
+	};
 </script>
 
 <section class="carousel" id="home" aria-label="Carousel of images">

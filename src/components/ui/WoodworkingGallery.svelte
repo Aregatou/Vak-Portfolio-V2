@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';
 	import { onMount, tick } from 'svelte';
@@ -39,24 +39,24 @@
 	let bgPosY = 50;
 	let zoomed = false;
 
-	function handleMouseMove(e) {
+	const handleMouseMove = (e) => {
 		const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
 		bgPosX = ((e.clientX - left) / width) * 100;
 		bgPosY = ((e.clientY - top) / height) * 100;
-	}
+	};
 
-	function handleMouseEnter() {
+	const handleMouseEnter = () => {
 		zoomed = true;
-	}
+	};
 
-	function handleMouseLeave() {
+	const handleMouseLeave = () => {
 		zoomed = false;
 		bgPosX = 50;
 		bgPosY = 50;
-	}
+	};
 </script>
 
-<section class="gallery-container" aria-label="Gallery of woodworking images">
+<section id="gallery" class="gallery-container" aria-label="Gallery of woodworking images">
 	<Splide bind:this={mainSplide} options={mainOptions}>
 		{#each images as image}
 			<SplideSlide>
@@ -67,7 +67,7 @@
 					on:mouseleave={handleMouseLeave}
 					style="background-image: url({image.src}); 
 					   background-position: {bgPosX}% {bgPosY}%;
-					   background-size: {zoomed ? '200%' : 'contain'};"
+					   background-size: {zoomed ? '150%' : 'contain'};"
 					role="img"
 					aria-label={image.alt}
 				>
@@ -87,7 +87,7 @@
 </section>
 
 <style lang="scss">
-	.gallery-container {
+	#gallery.gallery-container {
 		max-width: 800px;
 		width: 100%;
 		margin: 0 auto;
