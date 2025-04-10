@@ -46,6 +46,7 @@
 	<div class="card-image">
 		{#if mode === 'gallery' && image}
 			<img src={image} alt={title + ' preview'} class="card-hero-image" loading="lazy" />
+			<!-- <img src={image} alt={title + ' preview'} class="card-hero-image" loading="lazy" /> -->
 		{:else}
 			<div class="card-image-circle">
 				<div class="card-icon-container">
@@ -75,9 +76,9 @@
 			flex-direction: column;
 			align-items: center;
 			background: var(--svg-color);
-			// background: $amethyst;
 			color: $white;
 			border-radius: $curve-border;
+			border: 2px solid $dark-purple;
 			cursor: pointer;
 			transition: box-shadow 0.3s ease;
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -85,13 +86,13 @@
 			transition: bottom 0.3s ease, box-shadow 0.3s ease;
 			position: relative;
 			&:hover {
-				bottom: 10px;
 				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.65);
 			}
 			.card-image {
 				width: 100%;
 				aspect-ratio: 1;
 				overflow: hidden;
+				border-radius: $curve-border;
 
 				.card-hero-image {
 					width: 100%;
@@ -102,14 +103,29 @@
 					transition: transform 0.3s ease;
 					&:hover {
 						/* transform: scale(1.3); */
+						transition: opacity 0.3s ease;
+						opacity: 0;
 					}
 				}
 			}
 			.card-content {
 				padding: 0.5rem;
+				bottom: -20px;
+				position: absolute;
+				transition: bottom 0.3s ease, opacity 0.3s ease;
+				/* transition: opacity 0.3s ease; */
+
+				opacity: 0;
+
 				h2 {
 					margin-top: 0;
 					font-size: 1.3rem;
+				}
+			}
+			&:hover {
+				.card-content {
+					bottom: 0;
+					opacity: 1;
 				}
 			}
 		}
@@ -132,7 +148,7 @@
 				padding: $pad-1;
 				padding-bottom: 0;
 				.card-image-circle {
-					border: 2px solid $primary-red;
+					border: 4px solid $primary-red;
 					border-radius: 50%;
 					padding: $pad-1 * 2;
 					width: 40px;
@@ -183,16 +199,17 @@
 					display: flex;
 					flex-direction: column;
 					/* padding: $pad-1; */
+					position: relative;
 
 					.card-title {
 						text-align: center;
 						min-height: 60px;
-						font-size: 1.25rem;
+						font-size: 1.5rem;
 						margin-top: 0;
 					}
 
 					.card-description {
-						/* margin: initial; */
+						font-size: 1.05rem;
 						text-align: center;
 					}
 				}

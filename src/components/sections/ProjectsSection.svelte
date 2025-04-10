@@ -1,19 +1,20 @@
 <script lang="ts">
 	import Card from '$components/ui/Card.svelte';
 	import { fadeIn, SVGIcons } from '$lib';
-	import artProjects from '$data/artProjects.json';
 	import Modal from '$components/ui/Modal.svelte';
 	import ProjectGallery from '$components/ui/ProjectGallery.svelte';
 	import { projects } from '$data/projects';
+	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+	import '@splidejs/svelte-splide/css';
 
 	let showModal = false;
 	let activeProject = null;
 
 	const galleryColors = [
-		`var(--gallery-color-1)`,
-		`var(--gallery-color-2)`,
-		`var(--gallery-color-3)`,
-		`var(--gallery-color-4)`
+		'var(--gallery-color-1)',
+		'var(--gallery-color-2)',
+		'var(--gallery-color-3)',
+		'var(--gallery-color-4)'
 	];
 
 	const openProject = (project) => {
@@ -32,26 +33,45 @@
 	};
 </script>
 
-<section id="WhatICraft" class="fade-in-section" use:fadeIn>
-	<div class="section-header">
+<section id="WhatICraft">
+	<!-- <section id="WhatICraft" class="fade-in-section" use:fadeIn> -->
+	<div class="section-header overlap-content fade-in-section" use:fadeIn>
 		<h4>What I <span>craft</span></h4>
 	</div>
-	<div class="section-content cards-container">
-		<div class="cards-container">
+	<div class="section-content carousel-container outlined">
+		<Splide
+			class="gallery"
+			options={{
+				type: 'loop',
+				perPage: 3,
+				arrows: true,
+				padding: 65,
+				gap: '1rem',
+				pagination: false,
+				interval: 4000,
+				pauseOnHover: false,
+				trimSpace: true,
+				centerSlides: true,
+				autoplay: true
+			}}
+		>
 			{#each projects as project, index}
-				<Card
-					title={project.title}
-					description={project.description}
-					mode="gallery"
-					image={project.heroImage}
-					svgMarkup={SVGIcons.woodworking}
-					color={galleryColors[index % galleryColors.length]}
-					on:cardclick={() => openProject(project)}
-				/>
+				<SplideSlide>
+					<Card
+						title={project.title}
+						description={project.description}
+						mode="gallery"
+						image={project.heroImage}
+						svgMarkup={SVGIcons.woodworking}
+						color={galleryColors[index % galleryColors.length]}
+						on:cardclick={() => openProject(project)}
+					/>
+				</SplideSlide>
 			{/each}
-		</div>
+		</Splide>
 	</div>
 </section>
+
 {#if showModal && activeProject}
 	<Modal on:close={closeModal} title={activeProject.title}>
 		<ProjectGallery images={activeProject.images} />
@@ -61,12 +81,28 @@
 <style lang="scss">
 	#WhatICraft {
 		.section-content {
-			.cards-container {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center; // or space-evenly, if that works better with wrapping
-				gap: 1rem;
-				background: none;
+			overflow: hidden;
+			&.carousel-container {
+				background: url('/images/selfie-1.jpg') center center / cover no-repeat fixed;
+				position: relative;
+				z-index: 0;
+
+				width: 100%;
+				margin: 0 auto;
+				padding: 50px 0;
+				&:before {
+					content: '';
+					position: absolute;
+					inset: 0;
+					background-color: rgba(0, 0, 0, 0.5);
+					z-index: -1;
+				}
+				@include respond-to(desktop) {
+					flex-direction: row;
+					align-items: stretch;
+					background-position: center center;
+					background-size: cover;
+				}
 			}
 		}
 	}
