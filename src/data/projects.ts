@@ -17,8 +17,9 @@ export const projects: Project[] = [
 		title: 'Watercolor Goku',
 		heroImage: artProjects['goku-v1'][6].src,
 		images: artProjects['goku-v1'] as ImageData[],
-		description:
-			'Woodburned design, painted in watercolor, burned outer edge with a blowtorch, stained with pecan wood stain, and finally a few layers of lacquer creating a nice reflective finish.'
+		description: ''
+		// description:
+		// 	'Woodburned design, painted in watercolor, burned outer edge with a blowtorch, stained with pecan wood stain, and finally a few layers of lacquer creating a nice reflective finish.'
 	},
 	{
 		title: 'Odesza Lumina',

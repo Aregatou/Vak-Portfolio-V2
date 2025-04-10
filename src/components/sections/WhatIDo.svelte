@@ -25,8 +25,8 @@
 	];
 </script>
 
-<section id="WhatIDo" class="fade-in-section" use:fadeIn>
-	<div class="section-header overlap-content">
+<section id="WhatIDo">
+	<div class="section-header overlap-content fade-in-section" use:fadeIn>
 		<h4>What I <span>do</span></h4>
 	</div>
 	<div class="section-content">
@@ -56,6 +56,7 @@
 	#WhatIDo {
 		.section-content {
 			.cards-container {
+				background: url('/images/aloy-2.jpg') center center / cover no-repeat fixed;
 				position: relative;
 				bottom: 40px;
 				display: flex;
@@ -64,10 +65,24 @@
 				align-items: flex-start;
 				gap: 1rem;
 				padding: 3rem 1rem 1rem;
+				overflow: hidden;
+				z-index: 0;
+				color: white;
+				font-weight: 600;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
+				&:before {
+					content: '';
+					position: absolute;
+					inset: 0;
+					background-color: rgba(0, 0, 0, 0.5);
+					z-index: -1;
+				}
 				@include respond-to(desktop) {
 					flex-direction: row;
 					align-items: stretch;
+					background-position: calc(50% + 120px) center;
+					background-size: contain;
 				}
 			}
 			.skills {
