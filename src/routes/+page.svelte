@@ -30,7 +30,8 @@
 			import('$components/sections/WhatIDo.svelte'),
 			import('$components/sections/ClientsSection.svelte'),
 			import('$components/sections/TimelineSection.svelte'),
-			import('$components/sections/ProjectsSection.svelte')
+			import('$components/sections/ProjectsSection.svelte'),
+			import('$components/sections/ContactSection.svelte')
 		]);
 
 		sections = {
@@ -38,7 +39,8 @@
 			WhatIDo: modules[1].default,
 			ClientsSection: modules[2].default,
 			TimelineSection: modules[3].default,
-			ProjectsSection: modules[4].default
+			ProjectsSection: modules[4].default,
+			ContactSection: modules[5].default
 		};
 
 		setTimeout(() => {
@@ -67,7 +69,6 @@
 		position: relative;
 		width: 100%;
 		top: -100px;
-		/* z-index: 2; */
 		:global(section) {
 			margin-bottom: 2rem;
 			padding: 0 1rem;

@@ -34,6 +34,7 @@
 		<li><a href="#WhatIDo">What I Do</a></li>
 		<li><a href="#clients">Clients</a></li>
 		<li><a href="#WhatICraft">What I Craft</a></li>
+		<li><a href="#contact">Contact</a></li>
 	</ul>
 	<ul>
 		<li><a href="https://www.linkedin.com/in/vak-k/" target="_blank">LinkedIn</a></li>
@@ -110,7 +111,7 @@
 		h2,
 		h4 {
 			margin: 0;
-			text-align: center;
+			text-align: right;
 			color: $white;
 			text-shadow: var(--nav-text-shadow);
 		}
@@ -119,7 +120,7 @@
 		}
 		ul {
 			padding: 0;
-			text-align: center;
+			text-align: right;
 			list-style-type: none;
 
 			a {

@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"module": "ESNext",
 		"target": "ES2019",
+		"moduleResolution": "node",
 		"allowJs": true,
 		"checkJs": false,
 		"esModuleInterop": true,
@@ -18,9 +19,14 @@
 			"$lib": ["./src/lib"],
 			"$components/*": ["./src/components/*"],
 			"$data/*": ["./src/data/*"],
-			"$styles/*": ["./src/styles/*"]
-		}
+			"$styles/*": ["./src/styles/*"],
+			"$env/static/private": [".svelte-kit/types/src/env/static/private"],
+			"$env/static/public": [".svelte-kit/types/src/env/static/public"],
+			"$env/dynamic/private": [".svelte-kit/types/src/env/dynamic/private"],
+			"$env/dynamic/public": [".svelte-kit/types/src/env/dynamic/public"]
+		},
+		"typeRoots": ["node_modules/@types", ".svelte-kit/types"]
 	},
-	"include": ["src/**/*", "src/**/*.svelte"],
-	"exclude": [".svelte-kit", "node_modules"]
+	"include": ["src/**/*", "src/**/*.svelte", ".svelte-kit/types/**/*", "global.d.ts"],
+	"exclude": ["node_modules"] // no longer exclude .svelte-kit
 }
