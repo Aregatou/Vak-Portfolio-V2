@@ -108,7 +108,8 @@
 			if (target) {
 				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 				window.history.pushState(null, '', targetId);
-				
+
+				// Close mobile nav after navigation
 				if (navOpen && window.innerWidth < 1024) {
 					navOpen = false;
 					document.body.classList.remove('no-scroll');
@@ -166,7 +167,13 @@
 	});
 </script>
 
-<audio bind:this={synthAudio} src="/audio/80s-retro-synth-wave.mp3" preload="auto" loop aria-label="Background synthwave music">
+<audio
+	bind:this={synthAudio}
+	src="/audio/80s-retro-synth-wave.mp3"
+	preload="auto"
+	loop
+	aria-label="Background synthwave music"
+>
 	<p>Background synthwave music for enhanced browsing experience</p>
 </audio>
 <div class="colored-line" style="width: {lineWidth};" />
