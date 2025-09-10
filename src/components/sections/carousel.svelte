@@ -29,7 +29,7 @@
 		options={{
 			type: 'loop',
 			autoplay: true,
-			interval: 4000,
+			interval: 5000,
 			pauseOnHover: false
 		}}
 	>
@@ -130,7 +130,7 @@
 
 		.splide-caption {
 			position: absolute;
-			top: 54%;
+			top: 60%;
 			left: 50%;
 			transform: translateX(-50%);
 			text-align: center;

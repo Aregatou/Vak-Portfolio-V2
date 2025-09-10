@@ -6,9 +6,11 @@
 	import { projects } from '$data/projects';
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/svelte-splide/css';
+	import { onMount } from 'svelte';
 
 	let showModal = false;
 	let activeProject = null;
+	let splideRef;
 
 	const galleryColors = [
 		'var(--gallery-color-1)',
@@ -18,7 +20,6 @@
 	];
 
 	const openProject = (project) => {
-		console.log('openProject triggered:', project);
 		activeProject = project;
 		showModal = true;
 		document.body.classList.add('no-scroll');
@@ -31,6 +32,37 @@
 		document.body.classList.remove('no-scroll');
 		document.documentElement.classList.remove('no-scroll');
 	};
+
+	const fixSlideAccessibility = () => {
+		const hiddenSlides = document.querySelectorAll('.splide__slide[aria-hidden="true"]');
+		hiddenSlides.forEach((slide) => {
+			const focusableElements = slide.querySelectorAll(
+				'[tabindex], [role="button"], button, a, input, select, textarea'
+			);
+			focusableElements.forEach((element) => {
+				element.setAttribute('tabindex', '-1');
+			});
+		});
+
+		const visibleSlides = document.querySelectorAll('.splide__slide:not([aria-hidden="true"])');
+		visibleSlides.forEach((slide) => {
+			const focusableElements = slide.querySelectorAll('[role="button"]');
+			focusableElements.forEach((element) => {
+				element.setAttribute('tabindex', '0');
+			});
+		});
+	};
+
+	onMount(() => {
+		setTimeout(fixSlideAccessibility, 100);
+
+		setTimeout(() => {
+			if (splideRef?.splide) {
+				splideRef.splide.on('moved', fixSlideAccessibility);
+				splideRef.splide.on('mounted', fixSlideAccessibility);
+			}
+		}, 200);
+	});
 </script>
 
 <section id="WhatICraft">
@@ -40,6 +72,7 @@
 	</div>
 	<div class="section-content carousel-container outlined">
 		<Splide
+			bind:this={splideRef}
 			class="gallery"
 			options={{
 				type: 'loop',
@@ -52,7 +85,10 @@
 				pauseOnHover: false,
 				trimSpace: true,
 				centerSlides: true,
-				autoplay: true
+				autoplay: true,
+				accessibility: {
+					tabindex: '-1'
+				}
 			}}
 		>
 			{#each projects as project, index}

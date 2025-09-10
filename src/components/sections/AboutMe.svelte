@@ -7,18 +7,18 @@
 		<h4><span>Vak</span>htang Kobiashvili</h4>
 	</div>
 	<div class="section-content outlined">
-		<p>I build creative stuff that looks pretty good.</p>
+		<p>I build web applications that solve real problems and look great doing it.</p>
 		<p>
-			For <strong>9 years</strong>, I've been working with
-			<strong>508-compliant <a href="#clients">government contracts</a></strong>
-			—proving that accessible design <em>doesn't have to be dull</em>.
+			For <strong>9 years</strong>, I've specialized in
+			<strong>508-compliant <a href="#clients">government development</a></strong>,
+			proving that accessibility and great design can absolutely go hand in hand.
 		</p>
 		<p>
-			I built this portfolio from scratch using Svelte, packed it into an Nginx Docker container,
-			and host it directly on my 38TB unRaid server right in my living room.
+			I built this portfolio from scratch with SvelteKit, containerized it with Docker,
+			and host it on my own 38TB unRaid server running from my home lab.
 		</p>
 		<p>
-			While I think that's pretty cool, I'm also fairly confident making things with my hands too.
+			When I'm not coding, I bring the same problem-solving approach to woodworking and creative projects.
 		</p>
 	</div>
 </section>

@@ -30,7 +30,6 @@
 	});
 
 	const handleClick = (event) => {
-		console.log('Card clicked:', title);
 		dispatch('cardclick', event);
 	};
 </script>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let checked = false;
 	export let onChange = () => {};
+	export let label = 'Toggle';
 
 	const toggle = () => {
 		onChange(!checked);
@@ -8,8 +9,9 @@
 </script>
 
 <label class="toggle">
-	<input type="checkbox" bind:checked on:change={toggle} />
+	<input type="checkbox" bind:checked on:change={toggle} aria-label={label} />
 	<span class="slider" />
+	<span class="sr-only">{label}</span>
 </label>
 
 <style lang="scss">
@@ -55,5 +57,17 @@
 			transform: translateX(22px);
 			background-color: $cosmic-purple;
 		}
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>

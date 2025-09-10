@@ -22,11 +22,11 @@
 
 <div id="nav-container">
 	<div class="pic-container">
-		<img src="/images/vak-photo.png" alt="Vak Kobiashvili" />
+		<img src="/images/vak-photo.png" alt="Photo of Vak Kobiashvili" />
 	</div>
 
 	<h2>Vak Kobiashvili</h2>
-	<h4>Developer</h4>
+	<h3>Developer</h3>
 
 	<ul>
 		<li><a href="#home">Home</a></li>
@@ -44,7 +44,7 @@
 	</ul>
 	<div class="mode-container">
 		<p>synth-mode</p>
-		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} />
+		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} label="Toggle synth mode" />
 
 		<button on:click={toggleSynthAudio} style="visibility: {$synthMode ? 'visible' : 'hidden'};">
 			<img
@@ -109,13 +109,14 @@
 		}
 
 		h2,
-		h4 {
+		h3 {
 			margin: 0;
 			text-align: right;
 			color: $white;
+			background-color: none;
 			text-shadow: var(--nav-text-shadow);
 		}
-		h4 {
+		h3 {
 			font-style: italic;
 		}
 		ul {

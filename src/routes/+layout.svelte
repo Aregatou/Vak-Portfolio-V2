@@ -10,6 +10,7 @@
 	let isSynthPlaying = false;
 	let lineWidth = '100%';
 	let navOpen = false;
+	let mounted = false;
 
 	const updateLineWidth = () => {
 		const scrollPercentage =
@@ -84,6 +85,20 @@
 		}
 	};
 
+	const handleVisibilityChange = () => {
+		if (document.visibilityState === 'visible' && navOpen) {
+			navOpen = false;
+			document.body.classList.remove('no-scroll');
+			document.documentElement.classList.remove('no-scroll');
+		}
+	};
+
+	const handlePageShow = () => {
+		navOpen = false;
+		document.body.classList.remove('no-scroll');
+		document.documentElement.classList.remove('no-scroll');
+	};
+
 	const handleClick = (e) => {
 		const anchor = e.target.closest('a[href^="#"]');
 		if (anchor) {
@@ -93,13 +108,29 @@
 			if (target) {
 				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 				window.history.pushState(null, '', targetId);
+				
+				if (navOpen && window.innerWidth < 1024) {
+					navOpen = false;
+					document.body.classList.remove('no-scroll');
+					document.documentElement.classList.remove('no-scroll');
+				}
 			}
 		}
 	};
 
 	onMount(() => {
+		navOpen = false;
+		document.body.classList.remove('no-scroll');
+		document.documentElement.classList.remove('no-scroll');
+
+		setTimeout(() => {
+			mounted = true;
+		}, 100);
+
 		window.addEventListener('scroll', updateLineWidth);
 		window.addEventListener('resize', handleResize);
+		window.addEventListener('pageshow', handlePageShow);
+		document.addEventListener('visibilitychange', handleVisibilityChange);
 		document.addEventListener('click', handleClick, { capture: true, passive: false });
 
 		gridEl = document.querySelector('.scrolling-grid');
@@ -126,6 +157,8 @@
 		return () => {
 			window.removeEventListener('scroll', updateLineWidth);
 			window.removeEventListener('resize', handleResize);
+			window.removeEventListener('pageshow', handlePageShow);
+			document.removeEventListener('visibilitychange', handleVisibilityChange);
 			document.removeEventListener('click', handleClick, { capture: true });
 			document.body.classList.remove('no-scroll');
 			unsubscribe();
@@ -133,13 +166,15 @@
 	});
 </script>
 
-<audio bind:this={synthAudio} src="/audio/80s-retro-synth-wave.mp3" preload="auto" loop />
+<audio bind:this={synthAudio} src="/audio/80s-retro-synth-wave.mp3" preload="auto" loop aria-label="Background synthwave music">
+	<p>Background synthwave music for enhanced browsing experience</p>
+</audio>
 <div class="colored-line" style="width: {lineWidth};" />
 <div class="noise" />
 <div class="scrolling-grid" />
 <HamburgerToggle {navOpen} {toggleNav} />
 
-<nav class:open={navOpen}>
+<nav class:open={navOpen} class:mounted>
 	<Navbar {synthMode} {toggleSynthAudio} {isSynthPlaying} />
 </nav>
 
@@ -205,9 +240,14 @@
 			left: 0;
 			height: 100vh;
 			transform: translateX(-100%);
-			transition: transform 0.3s ease-out;
+			transition: none;
 			z-index: 103;
 		}
+
+		nav.mounted {
+			transition: transform 0.3s ease-out;
+		}
+
 		nav.open {
 			transform: translateX(0);
 		}
