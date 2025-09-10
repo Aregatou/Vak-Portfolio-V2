@@ -45,7 +45,7 @@
 
 		setTimeout(() => {
 			loading = false;
-		}, 1200);
+		}, 1500);
 	};
 
 	onMount(() => {

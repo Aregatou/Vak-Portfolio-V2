@@ -1,38 +1,49 @@
-# create-svelte
+# Vak Kobiashvili - Portfolio
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+My professional portfolio website showcasing web development expertise, artistic projects, and professional experience working with major government health organizations.
 
-## Creating a project
+Live and reachable at
+imvak.com
 
-If you're seeing this, you've probably already done this step. Congrats!
+## About
+
+This portfolio demonstrates proficiency in modern web technologies through a multi-section single-page application built with SvelteKit. I've included:
+
+- **Professional Timeline**: Experience across 10+ NIH institutes and government agencies including NCBI, CDC, NIBIB, and NIDA
+- **Technical Skills**: Frontend development with JavaScript, TypeScript, Svelte, Angular, React, HTML/CSS, and SASS
+- **Creative Projects**: Art gallery showcasing woodworking and mixed-media projects
+- **Modern Architecture**: Built with SvelteKit, TypeScript, SASS, and responsive design principles
+
+## Technical Implementation
+
+- **Framework**: SvelteKit with TypeScript
+- **Styling**: SASS with custom component architecture
+- **Features**: Dynamic loading, carousel components, responsive design, contact form with NodeMailer
+- **Performance**: Lazy loading, code splitting, and optimized asset delivery
+
+## Professional Experience
+
+Extensive experience working as a web developer for government health organizations:
+
+- **NCBI (2022-present)**: National Center for Biotechnology Information
+- **NIBIB (2020-2022)**: National Institute of Biomedical Imaging and Bioengineering
+- **CDC (2018-2020)**: Center for Disease Control
+- **Multiple NIH Institutes (2017-2022)**: NIDA, NIAMS, NIAAA, NIDCD, NIDCR, SAMHSA, ODP
+
+## Development
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+# Install dependencies
+npm install
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+# Build for production
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Contact
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Utilize my contact form directly at imvak.com
+Or email me at vak@imvak.com

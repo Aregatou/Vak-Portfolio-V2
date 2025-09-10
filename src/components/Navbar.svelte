@@ -39,7 +39,7 @@
 	<ul>
 		<li><a href="https://www.linkedin.com/in/vak-k/" target="_blank">LinkedIn</a></li>
 		<li>
-			<!-- <a href="https://github.com/Aregatou/Vak-Portfolio-V2" target="_blank">This site's code</a> -->
+			<a href="https://github.com/Aregatou/Vak-Portfolio-V2" target="_blank">Github</a>
 		</li>
 	</ul>
 	<div class="mode-container">
