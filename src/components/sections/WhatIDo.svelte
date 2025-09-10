@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Card from '$components/ui/Card.svelte';
 	import ProgressBar from '$components/ui/ProgressBar.svelte';
-	import { fadeIn, SVGIcons, frontEndSkills, otherSkills } from '$lib';
+	import { fadeIn, SVGIcons, frontEndSkills, otherSkills, devOpsSkills } from '$lib';
 
 	const cards = [
 		{
@@ -17,9 +17,9 @@
 			icon: SVGIcons.accessibility
 		},
 		{
-			title: 'DIY Automation',
+			title: 'DevOps & Infrastructure',
 			description:
-				'Years of building and fine-tuning custom systems—from Dockerized apps to a home server setup.',
+				'Self-hosting applications with Docker, managing home lab servers, and configuring production-ready deployments.',
 			icon: SVGIcons.diy
 		}
 	];
@@ -36,8 +36,11 @@
 			{/each}
 		</div>
 		<div class="skills">
-			{#each [frontEndSkills, otherSkills] as skillsList}
+			{#each [frontEndSkills, otherSkills, devOpsSkills] as skillsList, index}
 				<div class="column">
+					{#if index === 2}
+						<h5>DevOps & Infrastructure</h5>
+					{/if}
 					{#each skillsList as skill}
 						<ProgressBar
 							skill={skill.title}
@@ -91,6 +94,11 @@
 				.column {
 					flex: 1;
 					min-width: 350px;
+					h5 {
+						font-size: 1.2rem;
+						text-align: center;
+						margin-bottom: 0;
+					}
 				}
 			}
 		}

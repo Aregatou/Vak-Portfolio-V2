@@ -19,22 +19,34 @@ export const frontEndSkills: Skill[] = [
 	{ title: 'JavaScript', svgMarkup: 'javascript', color: '#f7df1e', percentage: 100 },
 	{ title: 'HTML / CSS', svgMarkup: 'html', color: '#333', percentage: 100 },
 	{ title: 'Svelte', svgMarkup: 'svelte', color: '#ff794c', percentage: 90 },
-	{ title: 'Angular', svgMarkup: 'angular', color: '#dd1b16', percentage: 70 },
+	{ title: 'Angular', svgMarkup: 'angular', color: '#dd1b16', percentage: 85 },
 	{ title: 'React', svgMarkup: 'react', color: '#149eca', percentage: 55 },
-	{ title: 'TypeScript', svgMarkup: 'typescript', color: '#7fa2c9', percentage: 72 },
-	{ title: 'jQuery', svgMarkup: 'jquery', color: '#0769ad', percentage: 82 },
-	{ title: 'SASS/SCSS', svgMarkup: 'sass', color: '#CF649A', percentage: 90 }
+	{ title: 'TypeScript', svgMarkup: 'typescript', color: '#7fa2c9', percentage: 80 },
+	{ title: 'jQuery', svgMarkup: 'jquery', color: '#0769ad', percentage: 82 }
 ];
 
 export const otherSkills: Skill[] = [
 	{ title: 'Drupal', svgMarkup: 'drupal', color: '#0678be', percentage: 86 },
-	{ title: 'Docker', svgMarkup: 'docker', color: '#1d63ed', percentage: 62 },
 	{ title: 'Moqups / Figma', svgMarkup: 'figma', color: '#0acf83', percentage: 65 },
 	{ title: 'Git / Github / Version Control', svgMarkup: 'git', color: '#fff', percentage: 80 },
-	{ title: 'UnRaid Server Management', svgMarkup: 'unraid', color: '#F05A2E', percentage: 80 },
 	{ title: 'Jira', svgMarkup: 'jira', color: '#3491F6', percentage: 85 },
 	{ title: 'Slack / MS Teams / Zoom', svgMarkup: 'slack', color: '#5E1E66', percentage: 100 },
-	{ title: 'Agile + Scrum Workflow', svgMarkup: 'scrum', color: '#5A72E9', percentage: 100 }
+	{ title: 'Agile + Scrum Workflow', svgMarkup: 'scrum', color: '#5A72E9', percentage: 100 },
+	{ title: 'SASS/SCSS', svgMarkup: 'sass', color: '#CF649A', percentage: 90 }
+];
+
+export const devOpsSkills: Skill[] = [
+	{ title: 'Docker Containerization', svgMarkup: 'docker', color: '#1d63ed', percentage: 75 },
+	{ title: 'UnRaid Server Administration', svgMarkup: 'unraid', color: '#F05A2E', percentage: 85 },
+	{ title: 'Nginx Reverse Proxy', svgMarkup: 'webDev', color: '#009639', percentage: 70 },
+	{
+		title: 'SSL/TLS Certificate Management',
+		svgMarkup: 'accessibility',
+		color: '#00A1C9',
+		percentage: 75
+	},
+	{ title: 'DNS & Domain Management', svgMarkup: 'responsive', color: '#7B68EE', percentage: 80 },
+	{ title: 'Home Lab Networking', svgMarkup: 'webDev', color: '#FF6B35', percentage: 85 }
 ];
 
 export const timelineExperiences: Experience[] = [
