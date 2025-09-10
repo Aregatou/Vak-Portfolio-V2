@@ -4,6 +4,7 @@ export { observeVisibility } from './observeVisibility';
 export {
 	frontEndSkills,
 	otherSkills,
+	devOpsSkills,
 	type Skill,
 	timelineExperiences,
 	type Experience

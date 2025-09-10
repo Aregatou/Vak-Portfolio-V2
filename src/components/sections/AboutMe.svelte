@@ -15,7 +15,8 @@
 		</p>
 		<p>
 			I built this portfolio from scratch with SvelteKit, containerized it with Docker,
-			and host it on my own 38TB unRaid server running from my home lab.
+			and deployed it on my own 38TB unRaid server running from my home lab—complete with 
+			Nginx reverse proxy, SSL termination via Cloudflare, and automated DNS management.
 		</p>
 		<p>
 			When I'm not coding, I bring the same problem-solving approach to woodworking and creative projects.
