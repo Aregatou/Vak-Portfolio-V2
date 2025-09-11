@@ -24,12 +24,12 @@
 		</p>
 
 		<details class="architecture-details">
-			<summary>Technical Architecture for my website</summary>
+			<summary>Technical Architecture for My Website</summary>
 			<div class="architecture-diagram">
 				<code>
 					Internet → Cloudflare → Home Router → Unraid Server → Docker Container<br />
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SSL/DNS]&nbsp;&nbsp;&nbsp;&nbsp;[Port
-					Forward]&nbsp;&nbsp;[Nginx Proxy]&nbsp;&nbsp;&nbsp;[SvelteKit App]
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SSL/DNS]&nbsp;&nbsp;[Port
+					Forward]&nbsp;&nbsp;[Nginx Proxy]&nbsp;&nbsp;[SvelteKit App]
 				</code>
 				<ul class="tech-stack">
 					<li><strong>Frontend:</strong> SvelteKit + TypeScript + SASS</li>

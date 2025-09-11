@@ -43,15 +43,14 @@
 		</li>
 	</ul>
 	<div class="mode-container">
-		<p>synth-mode</p>
-		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} label="Toggle synth mode" />
-
 		<button on:click={toggleSynthAudio} style="visibility: {$synthMode ? 'visible' : 'hidden'};">
 			<img
 				src={isSynthPlaying ? SVGIcons.pause : SVGIcons.play}
 				alt={isSynthPlaying ? 'Pause Music' : 'Play Music'}
 			/>
 		</button>
+		<p>synth-mode</p>
+		<ToggleSlider checked={!synthMode} onChange={toggleSynthMode} label="Toggle synth mode" />
 	</div>
 </div>
 
@@ -67,15 +66,15 @@
 		.mode-container {
 			color: $white;
 			font-style: italic;
-			margin: 0 auto;
 			display: flex;
 			align-items: center;
 			padding-left: 20px;
+			justify-content: flex-end;
 			p {
 				text-shadow: var(--synth-text);
 				margin-right: 5px;
 				font-size: 0.9rem;
-				display: inline;
+				/* display: inline; */
 			}
 			button {
 				background: none;
@@ -85,7 +84,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				margin-left: 10px;
+				margin-right: 10px;
 				img {
 					width: 20px;
 					height: 20px;
