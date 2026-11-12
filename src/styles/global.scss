@@ -1,7 +1,7 @@
+@use '@splidejs/svelte-splide/css/splide.min.css';
 @use 'theme' as *;
 @use 'fonts' as *;
 @use 'variables' as *;
-
 
 html,
 body {
@@ -15,6 +15,14 @@ html {
 	font-size: 16px;
 	overflow-y: scroll;
 	scrollbar-gutter: stable;
+
+	@media (max-width: 320px) {
+		overflow-x: auto;
+
+		body {
+			min-width: 320px;
+		}
+	}
 
 	body {
 		font-family: $font, Arial, sans-serif;
@@ -64,6 +72,14 @@ html {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-evenly;
+				}
+
+				.section-content.section-panel {
+					background: var(--container-bg);
+					border-radius: $radius-left;
+					padding: 3rem 2rem $pad-1 2rem;
+					font-size: 1.1rem;
+					margin-bottom: 0;
 				}
 
 				.overlap-content {
@@ -145,7 +161,6 @@ html {
 
 .fade-in-section-visible {
 	animation: slideInFromLeft 1s ease-out forwards;
-	/* 'forwards' will persist the final state */
 }
 
 @keyframes synth-scan {

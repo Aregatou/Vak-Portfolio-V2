@@ -7,20 +7,23 @@
 		<h4><span>Vak</span>htang Kobiashvili</h4>
 	</div>
 	<div class="section-content outlined">
-		<p>I build web applications that solve real problems and look great doing it.</p>
+		<p>
+			I build web applications, and I care as much about how they look and feel as how they work
+		</p>
 		<p>
 			For <strong>9 years</strong>, I've specialized in
-			<strong>508-compliant <a href="#clients">government development</a></strong>, proving that
-			accessibility and great design can absolutely go hand in hand.
+			<strong
+				>508-compliant <a href="#clients">development for federal health organizations</a></strong
+			>, proving that accessibility and great design can absolutely go hand in hand.
 		</p>
 		<p>
-			I built this portfolio from scratch with SvelteKit, containerized it with Docker, and deployed
-			it on my own 38TB unRaid server running from my home lab—complete with Nginx reverse proxy,
-			SSL termination via Cloudflare, and automated DNS management.
+			I designed and built this portfolio from scratch with SvelteKit, containerized it with Docker,
+			and deployed it on the 38 TB Unraid server in my home lab. I configured the Nginx reverse
+			proxy, Cloudflare TLS, and automated DNS myself.
 		</p>
 		<p>
-			When I'm not coding, I bring the same problem-solving approach to woodworking and creative
-			projects.
+			That same interest in design and problem-solving carries into what I build away from the
+			screen, from woodworking to engineering projects.
 		</p>
 
 		<details class="architecture-details">
@@ -50,13 +53,16 @@
 		.section-content {
 			background: var(--section-black);
 			color: $white;
-			padding: $pad-1 * 3;
-			font-size: 1.3rem;
+			padding: $pad-1 * 2;
+			font-size: 1rem;
 
 			a {
 				white-space: nowrap;
 			}
-
+			@include respond-to(desktop) {
+				font-size: 1.3rem;
+				padding: $pad-1 * 3;
+			}
 			.architecture-details {
 				margin-top: 2rem;
 				border: 1px solid rgba($white, 0.2);

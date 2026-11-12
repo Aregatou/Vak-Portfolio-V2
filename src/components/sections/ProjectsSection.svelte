@@ -1,16 +1,12 @@
 <script lang="ts">
 	import Card from '$components/ui/Card.svelte';
-	import { fadeIn, SVGIcons } from '$lib';
+	import { fadeIn } from '$lib';
 	import Modal from '$components/ui/Modal.svelte';
 	import ProjectGallery from '$components/ui/ProjectGallery.svelte';
 	import { projects } from '$data/projects';
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-	import '@splidejs/svelte-splide/css';
-	import { onMount } from 'svelte';
 
-	let showModal = false;
-	let activeProject = null;
-	let splideRef;
+	let activeProjectIndex = -1;
 
 	const galleryColors = [
 		'var(--gallery-color-1)',
@@ -19,60 +15,21 @@
 		'var(--gallery-color-4)'
 	];
 
-	const openProject = (project) => {
-		activeProject = project;
-		showModal = true;
-		document.body.classList.add('no-scroll');
-		document.documentElement.classList.add('no-scroll');
+	const preloadFirstPhoto = (src = '') => {
+		if (!src) return;
+
+		const image = new Image();
+		image.fetchPriority = 'low';
+		image.src = src;
 	};
-
-	const closeModal = () => {
-		showModal = false;
-		activeProject = null;
-		document.body.classList.remove('no-scroll');
-		document.documentElement.classList.remove('no-scroll');
-	};
-
-	const fixSlideAccessibility = () => {
-		const hiddenSlides = document.querySelectorAll('.splide__slide[aria-hidden="true"]');
-		hiddenSlides.forEach((slide) => {
-			const focusableElements = slide.querySelectorAll(
-				'[tabindex], [role="button"], button, a, input, select, textarea'
-			);
-			focusableElements.forEach((element) => {
-				element.setAttribute('tabindex', '-1');
-			});
-		});
-
-		const visibleSlides = document.querySelectorAll('.splide__slide:not([aria-hidden="true"])');
-		visibleSlides.forEach((slide) => {
-			const focusableElements = slide.querySelectorAll('[role="button"]');
-			focusableElements.forEach((element) => {
-				element.setAttribute('tabindex', '0');
-			});
-		});
-	};
-
-	onMount(() => {
-		setTimeout(fixSlideAccessibility, 100);
-
-		setTimeout(() => {
-			if (splideRef?.splide) {
-				splideRef.splide.on('moved', fixSlideAccessibility);
-				splideRef.splide.on('mounted', fixSlideAccessibility);
-			}
-		}, 200);
-	});
 </script>
 
 <section id="WhatICraft">
-	<!-- <section id="WhatICraft" class="fade-in-section" use:fadeIn> -->
 	<div class="section-header overlap-content fade-in-section" use:fadeIn>
 		<h4>What I <span>craft</span></h4>
 	</div>
 	<div class="section-content carousel-container outlined">
 		<Splide
-			bind:this={splideRef}
 			class="gallery"
 			options={{
 				type: 'loop',
@@ -86,21 +43,27 @@
 				trimSpace: true,
 				centerSlides: true,
 				autoplay: true,
-				accessibility: {
-					tabindex: '-1'
+				breakpoints: {
+					480: {
+						perPage: 1,
+						padding: { left: '0.75rem', right: '2.5rem' },
+						autoplay: false
+					}
 				}
 			}}
 		>
 			{#each projects as project, index}
+				{@const firstPhoto = project.images[0]?.src}
 				<SplideSlide>
 					<Card
 						title={project.title}
 						description={project.description}
 						mode="gallery"
 						image={project.heroImage}
-						svgMarkup={SVGIcons.woodworking}
 						color={galleryColors[index % galleryColors.length]}
-						on:cardclick={() => openProject(project)}
+						on:pointerenter={() => preloadFirstPhoto(firstPhoto)}
+						on:focus={() => preloadFirstPhoto(firstPhoto)}
+						on:click={() => (activeProjectIndex = index)}
 					/>
 				</SplideSlide>
 			{/each}
@@ -108,8 +71,9 @@
 	</div>
 </section>
 
-{#if showModal && activeProject}
-	<Modal on:close={closeModal} title={activeProject.title}>
+{#if activeProjectIndex >= 0}
+	{@const activeProject = projects[activeProjectIndex]}
+	<Modal on:close={() => (activeProjectIndex = -1)} title={activeProject.title}>
 		<ProjectGallery images={activeProject.images} />
 	</Modal>
 {/if}

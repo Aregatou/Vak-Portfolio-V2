@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
+	import { onMount } from 'svelte';
 
 	export let mode = 'icon';
 	export let image;
-	export let svgMarkup;
+	export let svgMarkup = '';
 	export let title;
 	export let description;
 	export let color = '#e04343';
@@ -28,37 +27,40 @@
 			loadSVG();
 		}
 	});
-
-	const handleClick = (event) => {
-		dispatch('cardclick', event);
-	};
 </script>
 
-<div
-	class="card {mode === 'gallery' ? 'gallery-mode' : 'card-mode'}"
-	style={`--svg-color: ${color}; --hover-svg-color: ${hoverColor};`}
-	on:click={handleClick}
-	role="button"
-	tabindex="0"
-	on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleClick(e)}
->
-	<div class="card-image">
-		{#if mode === 'gallery' && image}
-			<img src={image} alt={title + ' preview'} class="card-hero-image" loading="lazy" />
-			<!-- <img src={image} alt={title + ' preview'} class="card-hero-image" loading="lazy" /> -->
-		{:else}
+{#if mode === 'gallery'}
+	<button
+		type="button"
+		class="card gallery-mode"
+		style="--svg-color: {color};"
+		on:click
+		on:pointerenter
+		on:focus
+	>
+		<span class="card-image">
+			<img src={image} alt="" class="card-hero-image" loading="lazy" />
+		</span>
+		<span class="card-content">
+			<span class="card-title">{title}</span>
+			<span class="card-description">{description}</span>
+		</span>
+	</button>
+{:else}
+	<div class="card card-mode" style="--svg-color: {color}; --hover-svg-color: {hoverColor};">
+		<div class="card-image">
 			<div class="card-image-circle">
 				<div class="card-icon-container">
 					{@html svgContent}
 				</div>
 			</div>
-		{/if}
+		</div>
+		<div class="card-content">
+			<h2 class="card-title">{title}</h2>
+			<p class="card-description">{description}</p>
+		</div>
 	</div>
-	<div class="card-content">
-		<h2 class="card-title">{title}</h2>
-		<p class="card-description">{description}</p>
-	</div>
-</div>
+{/if}
 
 <style lang="scss">
 	.card {
@@ -71,7 +73,11 @@
 		align-items: flex-start;
 
 		&.gallery-mode {
+			width: 100%;
 			max-width: 250px;
+			padding: 0;
+			font: inherit;
+			text-align: left;
 			flex-direction: column;
 			align-items: center;
 			background: var(--svg-color);
@@ -79,7 +85,6 @@
 			border-radius: $curve-border;
 			border: 2px solid $dark-purple;
 			cursor: pointer;
-			transition: box-shadow 0.3s ease;
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 			bottom: 0;
 			transition: bottom 0.3s ease, box-shadow 0.3s ease;
@@ -101,7 +106,6 @@
 					transform: scale(1.2);
 					transition: transform 0.3s ease;
 					&:hover {
-						/* transform: scale(1.3); */
 						transition: opacity 0.3s ease;
 						opacity: 0;
 					}
@@ -112,19 +116,47 @@
 				bottom: -20px;
 				position: absolute;
 				transition: bottom 0.3s ease, opacity 0.3s ease;
-				/* transition: opacity 0.3s ease; */
 
 				opacity: 0;
 
-				h2 {
-					margin-top: 0;
+				.card-title {
 					font-size: 1.3rem;
+					font-weight: bold;
+					display: block;
+					margin-bottom: 0.83em;
+				}
+
+				.card-description {
+					display: block;
+					margin: 1em 0;
 				}
 			}
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				.card-content {
 					bottom: 0;
 					opacity: 1;
+				}
+			}
+
+			@include respond-to(extra-small) {
+				max-width: none;
+
+				.card-image .card-hero-image:hover {
+					opacity: 1;
+				}
+
+				.card-content {
+					position: static;
+					opacity: 1;
+
+					.card-title {
+						margin: 0;
+					}
+
+					.card-description {
+						display: none;
+					}
 				}
 			}
 		}
@@ -165,14 +197,21 @@
 			}
 
 			.card-content {
-				/* padding: $pad-1; */
 				.card-title {
 					margin: 0;
 					text-align: left;
 					font-size: 1.2rem;
 				}
-				.card-description {
-					/* margin-bottom: 0; */
+			}
+
+			@include respond-to(extra-small) {
+				flex-direction: column;
+				align-items: center;
+				gap: 0.5rem;
+				text-align: center;
+
+				.card-content .card-title {
+					text-align: center;
 				}
 			}
 
@@ -182,7 +221,6 @@
 				flex: 1;
 
 				.card-image {
-					margin-right: $pad-1;
 					padding: $pad-1 0 $pad-1 0;
 					justify-content: flex-start;
 					margin: 0 auto;
@@ -197,7 +235,6 @@
 					flex: 1;
 					display: flex;
 					flex-direction: column;
-					/* padding: $pad-1; */
 					position: relative;
 
 					.card-title {

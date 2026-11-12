@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Navbar from '$components/Navbar.svelte';
-	import HamburgerToggle from '$components/ui/hamburgerToggle.svelte';
+	import HamburgerToggle from '$components/ui/HamburgerToggle.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 

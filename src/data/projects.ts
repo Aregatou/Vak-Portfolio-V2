@@ -18,8 +18,6 @@ export const projects: Project[] = [
 		heroImage: artProjects['goku-v1'][6].src,
 		images: artProjects['goku-v1'] as ImageData[],
 		description: ''
-		// description:
-		// 	'Woodburned design, painted in watercolor, burned outer edge with a blowtorch, stained with pecan wood stain, and finally a few layers of lacquer creating a nice reflective finish.'
 	},
 	{
 		title: 'Odesza Lumina',

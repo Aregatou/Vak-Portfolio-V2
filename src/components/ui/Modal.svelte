@@ -1,96 +1,103 @@
 <script lang="ts">
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	const dispatch = createEventDispatcher();
 
 	export let title = '';
 
-	function close() {
-		dispatch('close');
-	}
+	const dispatch = createEventDispatcher();
+	let dialog: HTMLDialogElement;
+	let opened = false;
 
-	const handleKeydown = (event) => {
-		if (event.key === 'Escape') {
-			close();
-		}
+	onMount(() => {
+		dialog.showModal();
+		document.documentElement.classList.add('modal-open');
+		opened = true;
+
+		return () => {
+			document.documentElement.classList.remove('modal-open');
+			dialog.close();
+		};
+	});
+
+	const close = () => dispatch('close');
+
+	const dismissBackdrop = (event: PointerEvent) => {
+		if (event.target === dialog) close();
 	};
-
-	window.addEventListener('keydown', handleKeydown);
-	onDestroy(() => window.removeEventListener('keydown', handleKeydown));
 </script>
 
-<div class="modal-overlay-wrapper" transition:fade>
-	<button type="button" class="modal-overlay" aria-label="Close modal overlay" on:click={close}
-		>&nbsp;</button
-	>
-
-	<div
-		class="modal-content"
-		role="dialog"
-		aria-modal="true"
-		aria-labelledby="modalTitle"
-		transition:fade
-	>
+<dialog
+	bind:this={dialog}
+	aria-labelledby="modalTitle"
+	on:cancel|preventDefault={close}
+	on:pointerup={dismissBackdrop}
+	transition:fade
+>
+	<div class="modal-content">
 		<div class="modal-header">
 			<h2 id="modalTitle" class="card-title">{title}</h2>
-			<button class="modal-close" on:click={close} aria-label="Close modal">&times;</button>
+			<button type="button" class="modal-close" on:click={close} aria-label="Close modal">
+				&times;
+			</button>
 		</div>
-		<slot />
+		{#if opened}
+			<slot />
+		{/if}
 	</div>
-</div>
+</dialog>
 
 <style lang="scss">
-	.modal-overlay-wrapper {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background: rgba(0, 0, 0, 0.5);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1000;
-		.modal-overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.5);
-			border: none;
-			cursor: pointer;
+	:global(html.modal-open),
+	:global(html.modal-open body) {
+		overflow: hidden !important;
+	}
+
+	dialog {
+		width: 90%;
+		max-width: none;
+		max-height: none;
+		padding: 0;
+		border: none;
+		border-radius: 5px;
+		background: var(--modal-body);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+		&::backdrop {
+			background: rgba(0, 0, 0, 0.75);
+		}
+
+		@include respond-to(desktop) {
+			width: 50%;
 		}
 	}
 
 	.modal-content {
-		position: relative;
-		margin: auto;
-		background: var(--modal-body);
-		border-radius: 5px;
-		max-width: 90%;
-		width: 100%;
-		max-height: 90%;
+		max-height: 90vh;
+		max-height: 90dvh;
 		overflow-y: auto;
 		overflow-x: hidden;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	}
 
-		.modal-header {
-			background: var(--modal-header);
-			display: flex;
-			justify-content: space-between;
-			margin-bottom: 1rem;
-			padding: 1rem;
-			h2 {
-				margin: 0;
-			}
+	.modal-header {
+		background: var(--modal-header);
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+		padding: 1rem;
+
+		h2 {
+			margin: 0;
 		}
-		@include respond-to(desktop) {
-			max-width: 50%;
+
+		@include respond-to(extra-small) {
+			position: sticky;
+			top: 0;
+			z-index: 2;
+			margin-bottom: 0;
 		}
 	}
+
 	.modal-close {
-		position: relative;
 		background: transparent;
 		border: none;
 		font-size: 1.5rem;
