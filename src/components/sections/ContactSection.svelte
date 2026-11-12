@@ -42,7 +42,7 @@
 	<div class="section-header overlap-content">
 		<h4>Contact</h4>
 	</div>
-	<div class="section-content">
+	<div class="section-content section-panel">
 		<div class="contact-container">
 			<div class="contact-info">
 				<h2>Get In Touch</h2>
@@ -96,12 +96,6 @@
 		padding-left: 0;
 
 		.section-content {
-			background: var(--container-bg);
-			border-radius: $radius-left;
-			padding: 3rem 2rem $pad-1 2rem;
-			font-size: 1.1rem;
-			margin-bottom: 0;
-
 			.contact-container {
 				display: flex;
 				flex-wrap: wrap;

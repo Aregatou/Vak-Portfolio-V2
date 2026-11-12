@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-	import '@splidejs/svelte-splide/css';
-	import { lazyLoadImage } from '$lib';
 
 	export let loadingMessage = '';
 	export let loading = false;
@@ -38,8 +36,6 @@
 				src="/images/car-1.jpg"
 				alt="Vak snowboarding in a suit"
 				class="carousel-image"
-				use:lazyLoadImage
-				loading="lazy"
 			/></SplideSlide
 		>
 		<SplideSlide
@@ -47,7 +43,6 @@
 				src="/images/car-2.jpg"
 				alt="Vak dancing at a wedding"
 				class="carousel-image move-left"
-				use:lazyLoadImage
 				loading="lazy"
 			/></SplideSlide
 		>
@@ -56,7 +51,6 @@
 				src="/images/car-3.jpg"
 				alt="Vak jumping out of ice water"
 				class="carousel-image move-left"
-				use:lazyLoadImage
 				loading="lazy"
 			/></SplideSlide
 		>
@@ -65,7 +59,6 @@
 				src="/images/car-4.jpg"
 				alt="Stunningly beautiful large woodworking art piece"
 				class="carousel-image move-left"
-				use:lazyLoadImage
 				loading="lazy"
 			/></SplideSlide
 		>
@@ -135,12 +128,16 @@
 			transform: translateX(-50%);
 			text-align: center;
 			color: $white-transparent;
-			padding: 1em;
+			padding: 1em 0.5em;
 			font-family: $font-bold;
 			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-			font-size: 1.2rem;
+			font-size: 1.05rem;
 			z-index: 3;
 			pointer-events: none;
+			@include respond-to(desktop) {
+				font-size: 1.2rem;
+				padding: 1em;
+			}
 		}
 		.carousel-text {
 			position: absolute;
@@ -172,7 +169,7 @@
 		}
 		.carousel-loading {
 			position: absolute;
-			bottom: 10%;
+			bottom: 8%;
 			z-index: 3;
 			width: 100%;
 			p {
@@ -195,11 +192,17 @@
 					transform: rotate(360deg);
 				}
 			}
+			@include respond-to(desktop) {
+				bottom: 10%;
+			}
 		}
 	}
 
 	:global(.splide__pagination) {
-		bottom: 80px;
+		bottom: 30px;
+		@include respond-to(desktop) {
+			bottom: 80px;
+		}
 	}
 
 	@media screen and (max-height: 600px) {

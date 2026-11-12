@@ -1,5 +1,4 @@
 export { fadeIn } from './fadeIn';
-export { lazyLoadImage } from './lazyLoad';
 export { observeVisibility } from './observeVisibility';
 export {
 	frontEndSkills,

@@ -22,7 +22,7 @@
 
 <div id="nav-container">
 	<div class="pic-container">
-		<img src="/images/vak-photo.png" alt="Photo of Vak Kobiashvili" />
+		<img src="/images/vak-photo.png" alt="Vak Kobiashvili" />
 	</div>
 
 	<h2>Vak Kobiashvili</h2>
@@ -74,7 +74,6 @@
 				text-shadow: var(--synth-text);
 				margin-right: 5px;
 				font-size: 0.9rem;
-				/* display: inline; */
 			}
 			button {
 				background: none;
@@ -93,14 +92,21 @@
 		}
 		.pic-container {
 			position: relative;
-			margin: 0 auto 30px;
+			margin: 0 auto 10px;
 			transition: $ease-transform;
 
 			img {
 				width: 101%;
-				max-width: 205px;
+				max-width: 140px;
 				border-radius: 50%;
 				border: 5px solid $primary-orange;
+			}
+			@include respond-to(desktop) {
+				margin: 0 auto 20px;
+
+				img {
+					max-width: 205px;
+				}
 			}
 			&:hover {
 				transform: scale(1.1);
@@ -122,17 +128,18 @@
 			padding: 0;
 			text-align: right;
 			list-style-type: none;
+			margin: 10px 0;
 
 			a {
 				color: $white;
 				text-shadow: var(--nav-text-shadow);
 				display: inline-block;
 				vertical-align: middle;
-				font-size: 1.4rem;
+				font-size: 1.1rem;
 			}
 			@include respond-to(desktop) {
 				a {
-					font-size: 1.1rem;
+					font-size: 1.3rem;
 				}
 			}
 		}

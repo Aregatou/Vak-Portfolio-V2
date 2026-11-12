@@ -1,77 +1,48 @@
 <script lang="ts">
-	import { fadeIn, lazyLoadImage, timelineExperiences } from '$lib';
-	import { flip } from 'svelte/animate';
-	import { onMount } from 'svelte';
+	import { timelineExperiences } from '$lib';
 
-	const collapsedHeight = 665;
-
+	const midpoint = Math.ceil(timelineExperiences.length / 2);
+	const timelineGroups = [timelineExperiences.slice(0, midpoint), timelineExperiences.slice(midpoint)];
 	let showFullTimeline = false;
-	let timelineContainer;
-
-	const animateMaxHeight = (from, to, cleanup = false) => {
-		timelineContainer.style.maxHeight = from + 'px';
-		requestAnimationFrame(() => {
-			timelineContainer.style.maxHeight = to + 'px';
-		});
-		if (cleanup) {
-			timelineContainer.addEventListener('transitionend', function handler(e) {
-				if (e.propertyName === 'max-height') {
-					timelineContainer.style.maxHeight = '';
-					timelineContainer.removeEventListener('transitionend', handler);
-				}
-			});
-		}
-	};
-
-	const toggleTimeline = () => {
-		if (!timelineContainer) return;
-
-		if (!showFullTimeline) {
-			const fullHeight = timelineContainer.scrollHeight;
-			animateMaxHeight(collapsedHeight, fullHeight, true);
-		} else {
-			const currentHeight = timelineContainer.scrollHeight;
-			animateMaxHeight(currentHeight, collapsedHeight);
-		}
-		showFullTimeline = !showFullTimeline;
-	};
-
-	onMount(() => {
-		if (timelineContainer && !showFullTimeline) {
-			timelineContainer.style.maxHeight = collapsedHeight + 'px';
-		}
-	});
 </script>
 
 <section id="timeline">
 	<div class="section-content">
-		<div bind:this={timelineContainer} class="timeline-container">
-			{#each timelineExperiences as item, i (item.organization + '-' + item.period)}
-				<div
-					animate:flip={{ duration: (d) => d * 0.5 }}
-					class="timeline-item-wrapper"
-					class:last-visible={!showFullTimeline &&
-						i === Math.ceil(timelineExperiences.length / 2) - 1}
-				>
-					<div class="timeline-item" use:fadeIn class:alternate={i % 2 !== 0}>
-						<div class="timeline-content left">
-							<h3><a href={item.link} target="_blank">{item.organization}</a></h3>
-							<p>{item.period}</p>
-						</div>
-						<div class="timeline-content right">
-							<a href={item.link} target="_blank">
-								<div class="image-container {item.small}">
-									<img src={item.img} alt={item.alt} use:lazyLoadImage />
+		<div id="client-timeline" class="timeline-container" class:expanded={showFullTimeline}>
+			{#each timelineGroups as group, groupIndex}
+				<div class="timeline-group" inert={groupIndex === 1 && !showFullTimeline}>
+					{#each group as item, i (item.organization + '-' + item.period)}
+						<div
+							class="timeline-item-wrapper"
+							class:last-visible={!showFullTimeline &&
+								groupIndex === 0 && i === group.length - 1}
+						>
+							<div class="timeline-item">
+								<div class="timeline-content left">
+									<h3><a href={item.link} target="_blank">{item.organization}</a></h3>
+									<p>{item.period}</p>
 								</div>
-							</a>
+								<div class="timeline-content right">
+									<a href={item.link} target="_blank">
+										<div class="image-container {item.small}">
+											<img src={item.img} alt={item.alt} loading="lazy" />
+										</div>
+									</a>
+								</div>
+							</div>
 						</div>
-					</div>
+					{/each}
 				</div>
 			{/each}
 		</div>
 	</div>
 	<div class="timeline-toggle">
-		<button on:click={toggleTimeline} class="outlined" class:expanded={showFullTimeline}>
+		<button
+			on:click={() => (showFullTimeline = !showFullTimeline)}
+			class="outlined"
+			aria-expanded={showFullTimeline}
+			aria-controls="client-timeline"
+		>
 			{showFullTimeline ? 'Show Less' : 'Show All'}
 		</button>
 	</div>
@@ -92,7 +63,13 @@
 		.timeline-container {
 			position: relative;
 			overflow: hidden;
-			transition: max-height 0.5s ease;
+			display: grid;
+			grid-template-rows: max-content 0fr;
+			transition: grid-template-rows 0.5s ease;
+
+			&.expanded {
+				grid-template-rows: max-content 1fr;
+			}
 
 			&::before {
 				content: '';
@@ -105,6 +82,11 @@
 				transform: translateX(-50%);
 				z-index: 0;
 			}
+		}
+
+		.timeline-group:last-child {
+			min-height: 0;
+			overflow: hidden;
 		}
 
 		.timeline-item-wrapper {
@@ -124,12 +106,6 @@
 			margin: 0;
 			position: relative;
 			align-items: center;
-			transition: bottom 0.3s ease;
-			bottom: 0;
-
-			&:hover {
-				bottom: 10px;
-			}
 
 			.timeline-content {
 				padding: 0.7rem;
@@ -155,7 +131,6 @@
 						align-items: center;
 						justify-content: center;
 						background: $white;
-						/* background: var(--container-bg); */
 						padding: 1rem;
 						border-radius: $curve-border;
 						transition: box-shadow 0.3s ease;
@@ -166,10 +141,20 @@
 
 						&.img-shrink {
 							width: 150px;
+
+							@include respond-to(mobile) {
+								box-sizing: border-box;
+								width: min(calc(150px + 2rem), 100%);
+							}
 						}
 					}
 					a {
 						overflow: initial;
+
+						@include respond-to(mobile) {
+							max-width: 100%;
+						}
+
 						&:hover {
 							text-shadow: none;
 							&::after {
@@ -204,6 +189,61 @@
 			}
 		}
 
+		@include respond-to(extra-small) {
+			$timeline-axis: 7.75rem;
+
+			.section-content {
+				width: 100%;
+			}
+
+			.timeline-container::before,
+			.timeline-item::after {
+				left: $timeline-axis;
+			}
+
+			.timeline-item-wrapper.last-visible {
+				-webkit-mask-image: none;
+				mask-image: none;
+			}
+
+			.timeline-item {
+				grid-template-columns: $timeline-axis minmax(0, 1fr);
+
+				.timeline-content {
+					padding: 0.5rem 0;
+
+					&.left {
+						padding-right: $pad-1;
+
+						h3 {
+							margin: 0 0 0.25rem;
+						}
+
+						p {
+							margin: 0;
+						}
+					}
+
+					&.right {
+						padding-left: $pad-1;
+
+						a {
+							width: 100%;
+						}
+
+						.image-container {
+							box-sizing: border-box;
+							padding: 0.5rem;
+
+							&.img-shrink {
+								width: min(150px, 100%);
+							}
+						}
+					}
+				}
+			}
+		}
+
 		.timeline-toggle {
 			display: flex;
 			justify-content: center;
@@ -222,8 +262,6 @@
 				font-size: 1.3rem;
 				&:hover {
 					background: color.adjust($primary-orange, $lightness: -10%);
-				}
-				&.expanded {
 				}
 			}
 		}

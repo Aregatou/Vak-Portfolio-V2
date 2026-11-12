@@ -7,7 +7,7 @@
 		{
 			title: 'Responsive Web Design',
 			description:
-				'9 years of crafting websites that look great and work seamlessly on any device.',
+				'9 years of designing and building responsive websites, with a focus on how layouts, typography, and interactions carry across screen sizes.',
 			icon: SVGIcons.responsive
 		},
 		{
@@ -93,7 +93,7 @@
 				flex-wrap: wrap;
 				.column {
 					flex: 1;
-					min-width: 350px;
+					min-width: min(350px, 100%);
 					h5 {
 						font-size: 1.2rem;
 						text-align: center;
