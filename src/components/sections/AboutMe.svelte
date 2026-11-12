@@ -56,9 +56,6 @@
 			padding: $pad-1 * 2;
 			font-size: 1rem;
 
-			a {
-				white-space: nowrap;
-			}
 			@include respond-to(desktop) {
 				font-size: 1.3rem;
 				padding: $pad-1 * 3;
